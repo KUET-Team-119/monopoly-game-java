@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Board {
     private static final int SIZE = 40;
-    private List squares = new ArrayList(SIZE);
+    private List<Square> squares = new ArrayList<Square>(SIZE);
 
     public Board() {
         buildSquares();

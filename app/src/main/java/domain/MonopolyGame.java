@@ -1,13 +1,11 @@
 package domain;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class MonopolyGame {
     private static final int ROUNDS_TOTAL = 20;
-    private List players;
+    private List<Player> players;
     private Board board = new Board();
 
     public MonopolyGame() {
@@ -22,7 +20,7 @@ public class MonopolyGame {
         if (numOfPlayers < 2 || numOfPlayers > 8) {
             throw new IllegalArgumentException("경기자 수는 2명 이상 8명 이하여야 합니다.");
         }
-        players = new ArrayList(numOfPlayers);
+        players = new ArrayList<Player>(numOfPlayers);
         playGame();
     }
 
@@ -32,7 +30,7 @@ public class MonopolyGame {
         }
     }
 
-    public List getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 

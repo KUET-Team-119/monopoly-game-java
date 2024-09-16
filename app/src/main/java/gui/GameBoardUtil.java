@@ -28,33 +28,33 @@ public class GameBoardUtil {
 		return cells;
 	}
 	
-	public static List getNorthCells(Board board) {
+	public static List<Piece> getNorthCells(Board board) {
 		Dimension d = calculateDimension(board.getSquareNumber());
 		int longSide = d.width;
 		int shortSide = d.height;
-		List cells = new ArrayList();
+		List<Piece> cells = new ArrayList<Piece>();
 		for(int i = longSide + 2 + shortSide; i <= longSide + 2 + shortSide + longSide + 1; i++) {
 			cells.add(board.getSquare(i));
 		}
 		return cells;
 	}
 	
-	public static List getSouthCells(Board board) {
+	public static List<Piece> getSouthCells(Board board) {
 		Dimension d = calculateDimension(board.getSquareNumber());
 		int longSide = d.width;
 		int shortSide = d.height;
-		List cells = new ArrayList();
+		List<Piece> cells = new ArrayList<Piece>();
 		for(int i = longSide + 1; i >= 0; i--) {
 			cells.add(board.getSquare(i));
 		}
 		return cells;
 	}
 	
-	public static List getWestCells(Board board) {
+	public static List<Piece> getWestCells(Board board) {
 		Dimension d = calculateDimension(board.getSquareNumber());
 		int longSide = d.width;
 		int shortSide = d.height;
-		List cells = new ArrayList();
+		List<Piece> cells = new ArrayList<Piece>();
 		for(int i = longSide + 1 + shortSide; i > longSide + 1; i--) {
 			cells.add(board.getSquare(i));
 		}
