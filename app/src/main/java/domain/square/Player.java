@@ -48,8 +48,8 @@ public class Player {
         Die secondDie = dice.get(1);
 
         System.out.println("주사위를 굴립니다.");
-        int faceValueOfFirstDie = firstDie.roll();
-        int faceValueOfSecondDie = secondDie.roll();
+        int faceValueOfFirstDie = firstDie.roll(RandomUtil.randomNum());
+        int faceValueOfSecondDie = secondDie.roll(RandomUtil.randomNum());
 
         System.out.println("첫 번째 주사위 눈: " + faceValueOfFirstDie);
         System.out.println("두 번째 주사위 눈: " + faceValueOfSecondDie);
@@ -71,13 +71,20 @@ public class Player {
     public void attemptPurchase(RegularSquare square) {
         int price = square.findPrice();
         if (cash >= price && !square.isSelled) {
-            square.setOwner(this);
-            reduceCash(price);
+            purchaseSquare(square, price);
             return;
         }
+        payRent(square);
+    }
+
+    private void purchaseSquare(RegularSquare square, int price) {
+        square.setOwner(this);
+        reduceCash(price);
+    }
+
+    private void payRent(RegularSquare square) {
         int rent = square.findRent();
-        Player owner = square.findOwner();
-        owner.addCash(rent);
+        square.findOwner().addCash(rent);
         reduceCash(rent);
     }
 
@@ -89,26 +96,25 @@ public class Player {
         this.cash -= price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Player))
-            return false;
-        Player player = (Player) o;
-        return this.name == player.name;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
     public int getCash() {
         return cash;
     }
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Player player))
+            return false;
+        return Objects.equals(name, player.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
