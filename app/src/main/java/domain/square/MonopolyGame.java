@@ -36,7 +36,7 @@ public class MonopolyGame {
                 System.out.println("플레이어 수는 2명 이상, 8명 이하여야 합니다.");
             }
         }
-        players = new ArrayList<Player>(numOfPlayers);
+        players = new ArrayList<>(numOfPlayers);
 
         for (int i = 0; i < numOfPlayers; i++) {
             // TODO 임시로 플레이어의 이름을 숫자로 사용
@@ -49,13 +49,17 @@ public class MonopolyGame {
     private void playGame() {
         System.out.println("게임 시작!");
         for (int i = 1; i <= ROUNDS_TOTAL; i++) {
-            if (i == ROUNDS_TOTAL) {
-                System.out.println("마지막 라운드를 진행합니다.");    
-            } else {
-                System.out.println("제" + i + "라운드를 진행합니다.");
-            }
+            printRoundNumber(i);
             playRound();
         }
+    }
+
+    private void printRoundNumber(int number) {
+        if (number == ROUNDS_TOTAL) {
+            System.out.println("마지막 라운드를 진행합니다.");
+            return;
+        }
+        System.out.println("제" + number + "라운드를 진행합니다.");
     }
 
     private void playRound() {
