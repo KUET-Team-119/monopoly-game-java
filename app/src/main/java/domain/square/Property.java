@@ -10,7 +10,7 @@ public class Property {
     Player owner;
 
     public Property(int id, String name) {
-        this(id, name, 5000);
+        this(id, name, 5_000);
     }
 
     public Property(int id, String name, int price) {
@@ -44,10 +44,9 @@ public class Property {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof Property))
+        if (!(o instanceof Property property))
             return false;
-        Property property = (Property) o;
-        return Objects.equals(this.id, this.name);
+        return this.id == property.id;
     }
 
     @Override

@@ -11,21 +11,6 @@ public class Piece {
         this.location = new RegularSquare(0);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object)
-            return true;
-        if (!(object instanceof Piece))
-            return false;
-        Piece piece = (Piece) object;
-        return this.location == piece.location;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(location);
-    }
-
     public void move(int numOfMoves) {
         System.out.println("앞으로 " + numOfMoves + "칸 이동합니다.");
         int currentLocationId = location.getId();
@@ -36,5 +21,19 @@ public class Piece {
 
     public Square getLocation() {
         return this.location;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (!(object instanceof Piece piece))
+            return false;
+        return Objects.equals(name, piece.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

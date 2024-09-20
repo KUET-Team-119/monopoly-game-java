@@ -1,5 +1,7 @@
 package domain.square;
 
+import java.util.Objects;
+
 public class RegularSquare extends Square {
 
     boolean isSelled;
@@ -26,5 +28,19 @@ public class RegularSquare extends Square {
 
     public Player findOwner() {
         return property.getOwner();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof RegularSquare regularSquare))
+            return false;
+        return this.id == regularSquare.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id;
     }
 }
