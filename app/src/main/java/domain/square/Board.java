@@ -9,8 +9,11 @@ public class Board {
     List<Square> squares;
 
     public Board() {
-        squares = new ArrayList<Square>(SQUARES_TOTAL);
+        squares = new ArrayList<>(SQUARES_TOTAL);
+        build();
+    }
 
+    private void build() {
         for (int i = 0; i < 40; i++) {
             squares.add(new RegularSquare(i));
         }
