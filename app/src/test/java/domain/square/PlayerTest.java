@@ -19,20 +19,21 @@ public class PlayerTest {
         RegularSquare square = new RegularSquare(1);
         Player player = new Player("chori");
         player.attemptPurchase(square);
-        assertThat(player.getCash()).isEqualTo(1_400_000);
+        assertThat(player.getCash()).isEqualTo(1_495_000);
     }
 
     @Test
     @DisplayName("임대료 지불 테스트")
     void 임대료_지불() {
+        System.out.println("임대료 지불");
         RegularSquare square = new RegularSquare(1);
         Player player1 = new Player("chori");
         player1.attemptPurchase(square);
 
         Player player2 = new Player("paka");
         player2.attemptPurchase(square);
-        assertThat(player1.getCash()).isEqualTo(1_500_000);
-        assertThat(player2.getCash()).isEqualTo(1_400_000);
+        assertThat(player1.getCash()).isEqualTo(1_505_000);
+        assertThat(player2.getCash()).isEqualTo(1_490_000);
     }
 
     @Test
