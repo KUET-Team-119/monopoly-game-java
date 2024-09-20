@@ -1,13 +1,9 @@
-package monopolygame;
+package domain.square;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class AppTest {
-    @Test
-    void 시작() {
-        App app = new App();
-        assertThat(app).isEqualTo(new App());
-    }
+public class DieTest {
 }
