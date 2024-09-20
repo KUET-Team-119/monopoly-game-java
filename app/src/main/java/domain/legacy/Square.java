@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 
 public abstract class Square {
     private String name;

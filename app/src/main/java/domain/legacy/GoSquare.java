@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 
 public class GoSquare extends Square {
     private static final int GO = 200;

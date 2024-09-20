@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 
 public class LotSquare extends PropertySquare {
     public LotSquare(String name, int index) {

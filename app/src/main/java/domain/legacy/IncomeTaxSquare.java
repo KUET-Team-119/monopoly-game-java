@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 import java.lang.Math;
 
 public class IncomeTaxSquare extends Square {

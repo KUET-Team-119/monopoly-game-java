@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 
 public class Piece {
     private Square location;

@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 
 public class RegularSquare extends Square {
     public RegularSquare(String name, int index) {

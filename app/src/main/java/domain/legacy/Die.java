@@ -1,4 +1,4 @@
-package domain;
+package domain.legacy;
 
 public class Die {
     public static final int MAX = 6;
