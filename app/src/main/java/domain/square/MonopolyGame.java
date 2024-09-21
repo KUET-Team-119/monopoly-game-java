@@ -25,24 +25,8 @@ public class MonopolyGame {
     }
 
     public void initialize() {
-        int numOfPlayers = 0;
-        while (true) {
-            System.out.print("플레이어 수를 입력하세요: ");
-            numOfPlayers = scanner.nextInt();
-
-            if (numOfPlayers >= 2 && numOfPlayers <= 8) {
-                break;
-            } else {
-                System.out.println("플레이어 수는 2명 이상, 8명 이하여야 합니다.");
-            }
-        }
-        players = new ArrayList<>(numOfPlayers);
-
-        for (int i = 0; i < numOfPlayers; i++) {
-            // TODO 임시로 플레이어의 이름을 숫자로 사용
-            players.add(new Player(Integer.toString(i)));
-        }
-
+        int numOfPlayer = enterNumOfPlayer();
+        generatePlayer(numOfPlayer);
         playGame();
     }
 
@@ -65,6 +49,24 @@ public class MonopolyGame {
     private void playRound() {
         for (Player player : players) {
             player.takeTurn(dice);
+        }
+    }
+
+    private int enterNumOfPlayer() {
+        while (true) {
+            System.out.print("플레이어 수를 입력하세요: ");
+            int numOfPlayer = scanner.nextInt();
+            if (numOfPlayer >= 2 && numOfPlayer <= 8) {
+                return numOfPlayer;
+            } else {
+                System.out.println("플레이어 수는 2명 이상, 8명 이하여야 합니다.");
+            }
+        }
+    }
+
+    private void generatePlayer(int numOfPlayer) {
+        for (int i = 0; i < numOfPlayer; i++) {
+            players.add(new Player(Integer.toString(i)));
         }
     }
 
