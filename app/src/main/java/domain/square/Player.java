@@ -6,15 +6,15 @@ import java.util.Objects;
 public class Player {
     private static final int MAX_COUNT_OF_DOUBLE = 3;
 
-    private String name;
+    private String id;
     private Piece piece;
     private int cash;
     boolean chanceToRoll;
     int countOfDouble;
 
-    public Player(String name) {
-        this.name = name;
-        this.piece = new Piece(name);
+    public Player(String id) {
+        this.id = id;
+        this.piece = new Piece(id);
         this.cash = 1_500_000;
         this.chanceToRoll = false;
         this.countOfDouble = 0;
@@ -24,7 +24,7 @@ public class Player {
     public void takeTurn(List<Die> dice) {
         chanceToRoll = true;
         while (chanceToRoll) {
-            System.out.println("플레이어 " + name + "의 차례입니다.");
+            System.out.println("플레이어 " + id + "의 차례입니다.");
             int numOfMovement = rollDice(dice);
 
             if (countOfDouble == MAX_COUNT_OF_DOUBLE) {
@@ -100,8 +100,8 @@ public class Player {
         return cash;
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -110,11 +110,11 @@ public class Player {
             return true;
         if (!(o instanceof Player player))
             return false;
-        return Objects.equals(name, player.name);
+        return Objects.equals(id, player.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id);
     }
 }
