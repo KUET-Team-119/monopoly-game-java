@@ -11,10 +11,10 @@ public class Piece {
         this.location = new RegularSquare(0);
     }
 
-    public void move(int numOfMoves) {
-        System.out.println("앞으로 " + numOfMoves + "칸 이동합니다.");
+    public void move(int numOfMove) {
+        System.out.println("앞으로 " + numOfMove + "칸 이동합니다.");
         int currentLocationId = getLocation().getId();
-        int destinationId = (currentLocationId + numOfMoves) % Board.SQUARES_TOTAL;
+        int destinationId = (currentLocationId + numOfMove) % Board.SQUARES_TOTAL;
         this.location = new RegularSquare(destinationId);
         System.out.println(location.getName() +"에 도착했습니다.");
     }

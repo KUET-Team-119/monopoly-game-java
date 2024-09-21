@@ -24,7 +24,7 @@ public class Player {
         retrieveChanceToRoll();
         while (chanceToRoll) {
             System.out.println("플레이어 " + id + "의 차례입니다.");
-            int numOfMovement = rollDice(dice);
+            int numOfMove = rollDice(dice);
 
             if (isThirdDouble()) {
                 System.out.println("더블이 연속 3회 나왔습니다. 감옥으로 가세요.");
@@ -34,7 +34,7 @@ public class Player {
                 break;
             }
 
-            piece.move(numOfMovement);
+            piece.move(numOfMove);
 
             // TODO 이동 후 액션에 관한 로직
         }
