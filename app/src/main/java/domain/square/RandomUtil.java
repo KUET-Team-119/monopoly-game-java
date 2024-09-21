@@ -3,10 +3,10 @@ package domain.square;
 import java.util.Random;
 
 public class RandomUtil {
-    public static final int BOUND = 6;
-    public static Random random;
+    private final int BOUND = 6;
+    private Random random = new Random();
 
-    public static int randomNum() {
+    public int generateRandomNum() {
         return random.nextInt(BOUND) + 1;
     }
 }

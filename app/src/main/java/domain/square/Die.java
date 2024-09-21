@@ -1,18 +1,19 @@
 package domain.square;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class Die {
     String id;
     int faceValue;
+    RandomUtil randomUtil;
 
     public Die(String id) {
         this.id = id;
+        randomUtil = new RandomUtil();
     }
 
-    public int roll(int value) {
-        faceValue = value;
+    public int roll() {
+        faceValue = randomUtil.generateRandomNum();
         return faceValue;
     }
 

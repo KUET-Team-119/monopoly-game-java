@@ -48,8 +48,8 @@ public class Player {
         Die secondDie = dice.get(1);
 
         System.out.println("주사위를 굴립니다.");
-        int faceValueOfFirstDie = firstDie.roll(RandomUtil.randomNum());
-        int faceValueOfSecondDie = secondDie.roll(RandomUtil.randomNum());
+        int faceValueOfFirstDie = firstDie.roll();
+        int faceValueOfSecondDie = secondDie.roll();
 
         System.out.println("첫 번째 주사위 눈: " + faceValueOfFirstDie);
         System.out.println("두 번째 주사위 눈: " + faceValueOfSecondDie);
