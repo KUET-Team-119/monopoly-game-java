@@ -20,18 +20,17 @@ public class Player {
         this.countOfDouble = 0;
     }
 
-    // TODO 로직이 마음에 들지 않음🥺
     public void takeTurn(List<Die> dice) {
-        chanceToRoll = true;
+        retrieveChanceToRoll();
         while (chanceToRoll) {
             System.out.println("플레이어 " + id + "의 차례입니다.");
             int numOfMovement = rollDice(dice);
 
-            if (countOfDouble == MAX_COUNT_OF_DOUBLE) {
+            if (isThirdDouble()) {
                 System.out.println("더블이 연속 3회 나왔습니다. 감옥으로 가세요.");
-                chanceToRoll = false;
+                yieldChanceToRoll();
                 
-                // 감옥으로 가는 로직
+                // TODO 감옥으로 가는 로직
                 break;
             }
 
@@ -39,10 +38,8 @@ public class Player {
 
             // TODO 이동 후 액션에 관한 로직
         }
-        resetDoubleCount();
     }
 
-    // TODO 로직이 마음에 들지 않음🥺
     private int rollDice(List<Die> dice) {
         Die firstDie = dice.get(0);
         Die secondDie = dice.get(1);
@@ -51,17 +48,42 @@ public class Player {
         int faceValueOfFirstDie = firstDie.roll();
         int faceValueOfSecondDie = secondDie.roll();
 
-        System.out.println("첫 번째 주사위 눈: " + faceValueOfFirstDie);
-        System.out.println("두 번째 주사위 눈: " + faceValueOfSecondDie);
+        System.out.println("첫 번째 주사위의 눈: " + faceValueOfFirstDie);
+        System.out.println("두 번째 주사위의 눈: " + faceValueOfSecondDie);
 
-        if (faceValueOfFirstDie == faceValueOfSecondDie) {
+        if (isDouble(faceValueOfFirstDie, faceValueOfSecondDie)) {
             System.out.println("더블입니다.");
             countOfDouble++;
         } else{
-            chanceToRoll = false;
+            yieldChanceToRoll();
         }
 
         return faceValueOfFirstDie + faceValueOfSecondDie;
+    }
+
+    private void retrieveChanceToRoll() {
+        chanceToRoll = true;
+    }
+
+    private void yieldChanceToRoll() {
+        chanceToRoll = false;
+        resetDoubleCount();
+    }
+
+    private boolean isDouble(int faceValueOfFirstDie, int faceValueOfSecondDie) {
+        if (faceValueOfFirstDie == faceValueOfSecondDie) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isThirdDouble() {
+        if (countOfDouble == MAX_COUNT_OF_DOUBLE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void resetDoubleCount() {
