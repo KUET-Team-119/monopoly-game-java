@@ -1,7 +1,15 @@
-package domain.square;
+package domain.player;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
+
+import domain.component.Die;
+import domain.component.Piece;
+import domain.component.property.Property;
+import domain.component.property.RailRoadProperty;
+import domain.component.property.UtilityProperty;
+import domain.square.PropertySquare;
 
 public class Player {
     private static final int MAX_COUNT_OF_DOUBLE = 3;
@@ -9,8 +17,9 @@ public class Player {
     private String id;
     private Piece piece;
     private int cash;
-    boolean chanceToRoll;
-    int countOfDouble;
+    private boolean chanceToRoll;
+    private int countOfDouble;
+    private List<Property> properties;
 
     public Player(String id) {
         this.id = id;
@@ -18,6 +27,7 @@ public class Player {
         this.cash = 1_500_000;
         this.chanceToRoll = false;
         this.countOfDouble = 0;
+        this.properties = new ArrayList<Property>();
     }
 
     public void takeTurn(List<Die> dice) {
@@ -90,21 +100,23 @@ public class Player {
         countOfDouble = 0;
     }
 
-    public void attemptPurchase(RegularSquare square) {
-        int price = square.findPrice();
-        if (cash >= price && !square.isSelled) {
-            purchaseSquare(square, price);
+    public void attemptPurchase(PropertySquare square) {
+        if (square.isSoldOut()) {
+            payRent(square);
             return;
         }
-        payRent(square);
+        int price = square.findPrice();
+        if (cash >= price) {
+            purchaseSquare(square, price);
+        }
     }
 
-    private void purchaseSquare(RegularSquare square, int price) {
+    private void purchaseSquare(PropertySquare square, int price) {
         square.setOwner(this);
         reduceCash(price);
     }
 
-    private void payRent(RegularSquare square) {
+    private void payRent(PropertySquare square) {
         int rent = square.findRent();
         square.findOwner().addCash(rent);
         reduceCash(rent);
@@ -138,5 +150,33 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void gainProperty(Property property) {
+        properties.add(property);
+    }
+
+    public int countRailRoadProperty() {
+        int count = 0;
+        for (Property property : properties) {
+            if (property instanceof RailRoadProperty) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countUtilityProperty() {
+        int count = 0;
+        for (Property property : properties) {
+            if (property instanceof UtilityProperty) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int rollDiceForUtilityRent() {
+        return new Die("1").roll() + new Die("2").roll();
     }
 }

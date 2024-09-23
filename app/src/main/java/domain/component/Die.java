@@ -1,6 +1,8 @@
-package domain.square;
+package domain.component;
 
 import java.util.Objects;
+
+import domain.util.RandomUtil;
 
 public class Die {
     String id;

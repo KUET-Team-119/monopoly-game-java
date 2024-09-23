@@ -1,7 +1,12 @@
-package domain.square;
+package domain;
 
 import java.util.List;
 import java.util.Scanner;
+
+import domain.component.Board;
+import domain.component.Die;
+import domain.player.Player;
+
 import java.util.ArrayList;
 
 public class MonopolyGame {

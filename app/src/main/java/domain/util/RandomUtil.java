@@ -1,4 +1,4 @@
-package domain.square;
+package domain.util;
 
 import java.util.Random;
 

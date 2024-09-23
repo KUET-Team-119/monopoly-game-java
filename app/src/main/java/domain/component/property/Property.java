@@ -1,43 +1,34 @@
-package domain.square;
+package domain.component.property;
 
 import java.util.Objects;
 
-public class Property {
+import domain.player.Player;
+
+public abstract class Property {
     int id;
     String name;
     int price;
-    int rent;
     Player owner;
 
-    public Property(int id, String name) {
-        this(id, name, 5_000);
-    }
-
     public Property(int id, String name, int price) {
-        this(id, name, price, 10_000);
-    }
-
-    public Property(int id, String name, int price, int rent) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.rent = rent;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public Player getOwner() {
-        return owner;
-    }
-
-    public int getRent() {
-        return rent;
-    }
+    public abstract int getRent();
 
     public void setOwner(Player player) {
         owner = player;
+        player.gainProperty(this);
+    }
+
+    public Player getOwner() {
+        return owner;
     }
 
     @Override
