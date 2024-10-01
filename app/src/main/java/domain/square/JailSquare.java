@@ -2,9 +2,9 @@ package domain.square;
 
 import domain.player.Player;
 
-public class SocialFundSquare extends Square {
+public class JailSquare extends Square {
 
-    public SocialFundSquare(int id, String name) {
+    public JailSquare(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -14,5 +14,5 @@ public class SocialFundSquare extends Square {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
     }
-    
+
 }

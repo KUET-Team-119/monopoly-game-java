@@ -26,7 +26,7 @@ public class Player {
         this.piece = new Piece(id);
         this.cash = 1_500_000;
         this.chanceToRoll = false;
-        this.countOfDouble = 0;
+        this.countOfDouble = 0; // TODO 주사위 책임으로(?)
         this.properties = new ArrayList<Property>();
     }
 
@@ -80,6 +80,7 @@ public class Player {
         resetDoubleCount();
     }
 
+    // TODO 주사위 책임으로(?)
     private boolean isDouble(int faceValueOfFirstDie, int faceValueOfSecondDie) {
         if (faceValueOfFirstDie == faceValueOfSecondDie) {
             return true;
@@ -88,6 +89,7 @@ public class Player {
         }
     }
 
+    // TODO 주사위 책임으로(?)
     private boolean isThirdDouble() {
         if (countOfDouble == MAX_COUNT_OF_DOUBLE) {
             return true;
@@ -96,6 +98,7 @@ public class Player {
         }
     }
 
+    // TODO 주사위 책임으로(?)
     private void resetDoubleCount() {
         countOfDouble = 0;
     }

@@ -7,8 +7,8 @@ import domain.player.Player;
 
 public class LotSquare extends PropertySquare {
 
-    public LotSquare(int id, String name) {
-        property = new LotProperty(id, name, id);
+    public LotSquare(int id, String name, int price) {
+        this.property = new LotProperty(id, name, price);
     }
 
     @Override
