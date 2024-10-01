@@ -3,6 +3,7 @@ package domain.component;
 import java.util.Objects;
 
 import domain.square.Square;
+import domain.square.SquareType;
 
 public class Piece {
     String name;
@@ -10,7 +11,7 @@ public class Piece {
 
     public Piece(String name) {
         this.name = name;
-        this.location = Board.squares.get(0);  // 출발점에서 시작
+        this.location = Board.squares.get(SquareType.GO.getIndex());  // 출발점에서 시작
     }
 
     public void goForward(int numOfMove) {

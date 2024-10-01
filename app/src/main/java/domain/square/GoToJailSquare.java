@@ -4,7 +4,7 @@ import domain.component.Board;
 import domain.player.Player;
 
 public class GoToJailSquare extends Square {
-    private final Square JAIL_SQUARE = Board.squares.get(10);
+    private final Square JAIL_SQUARE = Board.squares.get(SquareType.JAIL.getIndex());
     private final int PRISON_TERM = 3;
 
     public GoToJailSquare(int id, String name) {

@@ -3,32 +3,57 @@ package domain.square;
 public class SquareFactory {
     private static int idCounter = -1;  // idCounter 초기값을 -1로 설정
 
-    public static Square createSquare(String squareType, String name, int price) {
+    public static Square createSquare(SquareType squareType) {
         int id = ++idCounter;  // 고유한 ID 부여
 
         switch (squareType) {
-            case "Lot":
-                return new LotSquare(id, name, price);
-            case "RailRoad":
-                return new RailRoadSquare(id, name, price);
-            case "Utility":
-                return new UtilitySquare(id, name, price);
-            case "Go":
-                return new GoSquare(id, name);
-            case "Jail":
-                return new JailSquare(id, name);
-            case "FreeParking":
-                return new FreeParkingSquare(id, name);
-            case "GoToJail":
-                return new GoToJailSquare(id, name);
-            case "IncomeTax":
-                return new IncomeTaxSquare(id, name);
-            case "LuxuryTax":
-                return new LuxuryTaxSquare(id, name);
-            case "SocialFund":
-                return new SocialFundSquare(id, name);
-            case "Chance":
-                return new ChanceSquare(id, name);
+            case LOT_SUWON:
+            case LOT_YONGIN:
+            case LOT_GUNSAN:
+            case LOT_IKSAN:
+            case LOT_JEONJU:
+            case LOT_GYEONGJU:
+            case LOT_POHANG:
+            case LOT_DAEGU:
+            case LOT_CHANGWON:
+            case LOT_ULSAN:
+            case LOT_BUSAN:
+            case LOT_JEJU:
+            case LOT_YEOSU:
+            case LOT_GWANGJU:
+            case LOT_CHUNCHEON:
+            case LOT_GANGNEUNG:
+            case LOT_WONJU:
+            case LOT_CHEONGJU:
+            case LOT_CHEONAN:
+            case LOT_DAEJEON:
+            case LOT_INCHEON:
+            case LOT_SEOUL:
+                return new LotSquare(id, squareType.getName(), squareType.getPrice());
+            case RAILROAD_GWANGJU:
+            case RAILROAD_BUSAN:
+            case RAILROAD_CHUNCHEON:
+            case RAILROAD_SEOUL:
+                return new RailRoadSquare(id, squareType.getName(), squareType.getPrice());
+            case UTILITY_ELECTRIC:
+            case UTILITY_WATER:
+                return new UtilitySquare(id, squareType.getName(), squareType.getPrice());
+            case GO:
+                return new GoSquare(id, squareType.getName());
+            case JAIL:
+                return new JailSquare(id, squareType.getName());
+            case FREE_PARKING:
+                return new FreeParkingSquare(id, squareType.getName());
+            case GO_TO_JAIL:
+                return new GoToJailSquare(id, squareType.getName());
+            case INCOME_TAX:
+                return new IncomeTaxSquare(id, squareType.getName());
+            case LUXURY_TAX:
+                return new LuxuryTaxSquare(id, squareType.getName());
+            case SOCIAL_FUND:
+                return new SocialFundSquare(id, squareType.getName());
+            case CHANCE:
+                return new ChanceSquare(id, squareType.getName());
             default:
                 throw new IllegalArgumentException("Unknown square type: " + squareType);
         }
