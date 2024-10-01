@@ -2,7 +2,6 @@ package domain.component;
 
 import java.util.Objects;
 
-import domain.square.LotSquare;
 import domain.square.Square;
 
 public class Piece {
@@ -11,21 +10,23 @@ public class Piece {
 
     public Piece(String name) {
         this.name = name;
-        // TODO LotSquare 생성이 이상함
-        this.location = new LotSquare(0, "시작");
+        this.location = Board.squares.get(0);  // 출발점에서 시작
     }
 
-    public void move(int numOfMove) {
+    public void goForward(int numOfMove) {
         System.out.println("앞으로 " + numOfMove + "칸 이동합니다.");
         int currentLocationId = getLocation().getId();
         int destinationId = (currentLocationId + numOfMove) % Board.SQUARES_TOTAL;
-        // TODO LotSquare 생성이 이상함
-        this.location = new LotSquare(destinationId, "시작");
+        setLocation(Board.squares.get(destinationId));
         System.out.println(location.getName() +"에 도착했습니다.");
     }
 
     public Square getLocation() {
         return this.location;
+    }
+
+    public void setLocation(Square destination) {
+        this.location = destination;
     }
 
     @Override

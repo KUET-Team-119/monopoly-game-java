@@ -11,8 +11,7 @@ public class JailSquare extends Square {
 
     @Override
     void landedOn(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
+        System.out.println("감옥에서 면회 중...");
     }
 
 }

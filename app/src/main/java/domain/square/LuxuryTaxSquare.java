@@ -3,6 +3,7 @@ package domain.square;
 import domain.player.Player;
 
 public class LuxuryTaxSquare extends Square {
+    private final int TAX = 100;
 
     public LuxuryTaxSquare(int id, String name) {
         this.id = id;
@@ -11,8 +12,8 @@ public class LuxuryTaxSquare extends Square {
 
     @Override
     void landedOn(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
+        System.out.println("사치세 " + TAX + "원을 납부하세요.");
+        player.reduceCash(TAX);
     }
     
 }

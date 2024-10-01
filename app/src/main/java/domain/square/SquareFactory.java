@@ -25,9 +25,9 @@ public class SquareFactory {
                 return new IncomeTaxSquare(id, name);
             case "LuxuryTax":
                 return new LuxuryTaxSquare(id, name);
-            case "SocialFundTax":
+            case "SocialFund":
                 return new SocialFundSquare(id, name);
-            case "ChanceTax":
+            case "Chance":
                 return new ChanceSquare(id, name);
             default:
                 throw new IllegalArgumentException("Unknown square type: " + squareType);

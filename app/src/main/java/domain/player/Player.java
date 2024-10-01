@@ -20,6 +20,7 @@ public class Player {
     private boolean chanceToRoll;
     private int countOfDouble;
     private List<Property> properties;
+    private int prisonTerm;
 
     public Player(String id) {
         this.id = id;
@@ -28,6 +29,7 @@ public class Player {
         this.chanceToRoll = false;
         this.countOfDouble = 0; // TODO 주사위 책임으로(?)
         this.properties = new ArrayList<Property>();
+        this.prisonTerm = 0;
     }
 
     public void takeTurn(List<Die> dice) {
@@ -44,7 +46,7 @@ public class Player {
                 break;
             }
 
-            piece.move(numOfMove);
+            piece.goForward(numOfMove);
 
             // TODO 이동 후 액션에 관한 로직
         }
@@ -141,6 +143,10 @@ public class Player {
         return id;
     }
 
+    public Piece getPiece() {
+        return piece;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -181,5 +187,9 @@ public class Player {
 
     public int rollDiceForUtilityRent() {
         return new Die("1").roll() + new Die("2").roll();
+    }
+
+    public void setPrisonTerm(int prisonTerm) {
+        this.prisonTerm = prisonTerm;
     }
 }

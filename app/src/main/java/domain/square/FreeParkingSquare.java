@@ -11,8 +11,7 @@ public class FreeParkingSquare extends Square{
 
     @Override
     void landedOn(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
+        System.out.println("무료 주차장입니다.");
     }
     
 }

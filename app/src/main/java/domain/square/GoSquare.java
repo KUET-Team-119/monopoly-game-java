@@ -3,6 +3,7 @@ package domain.square;
 import domain.player.Player;
 
 public class GoSquare extends Square{
+    private final int SALARY = 200;
 
     public GoSquare(int id, String name) {
         this.id = id;
@@ -11,8 +12,8 @@ public class GoSquare extends Square{
 
     @Override
     void landedOn(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
+        System.out.println("월급 " + SALARY + "원을 받아가세요.");
+        player.addCash(SALARY);
     }
     
 }
