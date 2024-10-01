@@ -105,26 +105,11 @@ public class Player {
         countOfDouble = 0;
     }
 
-    public void attemptPurchase(PropertySquare square) {
-        if (square.isSoldOut()) {
-            payRent(square);
-            return;
-        }
-        int price = square.findPrice();
+    public void attemptPurchase(PropertySquare square, int price) {
         if (cash >= price) {
-            purchaseSquare(square, price);
+            square.setOwner(this);
+            reduceCash(price);
         }
-    }
-
-    private void purchaseSquare(PropertySquare square, int price) {
-        square.setOwner(this);
-        reduceCash(price);
-    }
-
-    private void payRent(PropertySquare square) {
-        int rent = square.findRent();
-        square.findOwner().addCash(rent);
-        reduceCash(rent);
     }
 
     public void addCash(int price) {

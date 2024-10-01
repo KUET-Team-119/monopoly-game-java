@@ -1,19 +1,13 @@
 package domain.square;
 
-import java.util.Objects;
-
 import domain.component.property.LotProperty;
 import domain.player.Player;
 
 public class LotSquare extends PropertySquare {
 
     public LotSquare(int id, String name, int price) {
+        super(id);
         this.property = new LotProperty(id, name, price);
-    }
-
-    @Override
-    public void landedOn(Player player) {
-        // TODO
     }
 
     @Override
