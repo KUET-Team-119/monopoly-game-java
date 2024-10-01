@@ -7,10 +7,6 @@ public abstract class PropertySquare extends Square {
     protected boolean soldOut = false;
     protected Property property;
 
-    public PropertySquare(int id) {
-        super(id);
-    }
-
     public void setOwner(Player player) {
         soldOut = true;
         property.setOwner(player);

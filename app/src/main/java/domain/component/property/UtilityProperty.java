@@ -1,7 +1,5 @@
 package domain.component.property;
 
-import domain.component.property.Property;
-
 public class UtilityProperty extends Property {
     public UtilityProperty(int id, String name, int price) {
         super(id, name, price);
