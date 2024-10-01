@@ -1,7 +1,7 @@
 package domain.square;
 
 public class SquareFactory {
-    private static int idCounter = 0;
+    private static int idCounter = -1;  // idCounter 초기값을 -1로 설정
 
     public static Square createSquare(String squareType, String name, int price) {
         int id = ++idCounter;  // 고유한 ID 부여
