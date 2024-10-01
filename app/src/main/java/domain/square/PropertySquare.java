@@ -1,14 +1,14 @@
 package domain.square;
 
-import domain.component.property.Property;
 import domain.player.Player;
+import domain.component.property.Property;
 
-public abstract class PropertySquare extends Square{
+public abstract class PropertySquare extends Square {
     protected boolean soldOut = false;
     protected Property property;
 
-    public Player findOwner() {
-        return property.getOwner();
+    public PropertySquare(int id) {
+        super(id);
     }
 
     public void setOwner(Player player) {
@@ -16,23 +16,17 @@ public abstract class PropertySquare extends Square{
         property.setOwner(player);
     }
 
-    public int findPrice() {
-        return property.getPrice();
-    }
-
-    public int findRent() {
-        return property.getRent();
-    }
-
-    public boolean isSoldOut() {
-        return soldOut;
-    }
-
-    public void setSoldOut(boolean soldOut) {
-        this.soldOut = soldOut;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
+    public void landedOn(Player player) {
+        Player owner = property.getOwner();
+        if (owner == null) {
+            player.attemptPurchase(this, property.getPrice());
+            return;
+        }
+        if (owner == player) {
+            return;
+        }
+        int rent = property.getRent();
+        owner.addCash(rent);
+        player.reduceCash(rent);
     }
 }
