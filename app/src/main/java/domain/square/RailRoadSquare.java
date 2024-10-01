@@ -5,8 +5,8 @@ import domain.player.Player;
 
 public class RailRoadSquare extends PropertySquare {
 
-    public RailRoadSquare(int id) {
-        property = new RailRoadProperty(id, name, id);
+    public RailRoadSquare(int id, String name, int price) {
+        this.property = new RailRoadProperty(id, name, price);
     }
 
     @Override
