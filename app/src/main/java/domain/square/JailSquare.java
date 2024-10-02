@@ -10,7 +10,7 @@ public class JailSquare extends Square {
     }
 
     @Override
-    void landedOn(Player player) {
+    public void landedOn(Player player) {
         System.out.println("감옥에서 면회 중...");
     }
 

@@ -10,9 +10,9 @@ public class ChanceSquare extends Square {
     }
 
     @Override
-    void landedOn(Player player) {
+    public void landedOn(Player player) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
+        System.out.println("찬스 칸에 도착했습니다.");
     }
     
 }

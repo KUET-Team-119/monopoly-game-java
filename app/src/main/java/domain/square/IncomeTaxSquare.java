@@ -11,7 +11,7 @@ public class IncomeTaxSquare extends Square {
     }
 
     @Override
-    void landedOn(Player player) {
+    public void landedOn(Player player) {
         System.out.println("소득세 " + TAX + "원을 납부하세요.");
         player.reduceCash(TAX);
     }

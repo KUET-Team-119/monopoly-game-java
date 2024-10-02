@@ -10,9 +10,9 @@ public class SocialFundSquare extends Square {
     }
 
     @Override
-    void landedOn(Player player) {
+    public void landedOn(Player player) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'landedOn'");
+        System.out.println("사회사업기금 칸에 도착했습니다.");
     }
     
 }

@@ -2,15 +2,18 @@ package domain.component;
 
 import java.util.Objects;
 
+import domain.player.Player;
 import domain.square.Square;
 import domain.square.SquareType;
 
 public class Piece {
     String name;
     Square location;
+    Player player;
 
-    public Piece(String name) {
+    public Piece(String name, Player player) {
         this.name = name;
+        this.player = player;
         this.location = Board.squares.get(SquareType.GO.getIndex());  // 출발점에서 시작
     }
 
@@ -19,15 +22,16 @@ public class Piece {
         int currentLocationId = getLocation().getId();
         int destinationId = (currentLocationId + numOfMove) % Board.SQUARES_TOTAL;
         setLocation(Board.squares.get(destinationId));
-        System.out.println(location.getName() +"에 도착했습니다.");
     }
 
     public Square getLocation() {
-        return this.location;
+        return location;
     }
 
     public void setLocation(Square destination) {
         this.location = destination;
+        System.out.println(location.getName() +"에 도착했습니다.");
+        location.landedOn(player);
     }
 
     @Override

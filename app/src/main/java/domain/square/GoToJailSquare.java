@@ -13,7 +13,7 @@ public class GoToJailSquare extends Square {
     }
 
     @Override
-    void landedOn(Player player) {
+    public void landedOn(Player player) {
         System.out.println("감옥으로 가세요.");
         System.out.println(PRISON_TERM + "회 동안 수감됩니다.");
         player.getPiece().setLocation(JAIL_SQUARE);

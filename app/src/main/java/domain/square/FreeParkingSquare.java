@@ -10,7 +10,7 @@ public class FreeParkingSquare extends Square{
     }
 
     @Override
-    void landedOn(Player player) {
+    public void landedOn(Player player) {
         System.out.println("무료 주차장입니다.");
     }
     
