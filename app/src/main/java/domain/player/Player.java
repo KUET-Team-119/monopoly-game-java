@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import domain.component.Die;
 import domain.component.Piece;
 import domain.component.property.Property;
 import domain.component.property.RailRoadProperty;
 import domain.component.property.UtilityProperty;
+import domain.component.Board;
+import domain.component.Cup;
 import domain.square.PropertySquare;
+import domain.square.SquareType;
 
 public class Player {
     private static final int MAX_COUNT_OF_DOUBLE = 3;
@@ -17,7 +19,7 @@ public class Player {
     private String id;
     private Piece piece;
     private int cash;
-    private boolean chanceToRoll;
+    private int chanceToRoll;
     private int countOfDouble;
     private List<Property> properties;
     private int prisonTerm;
@@ -26,82 +28,71 @@ public class Player {
         this.id = id;
         this.piece = new Piece(id);
         this.cash = 1_500_000;
-        this.chanceToRoll = false;
-        this.countOfDouble = 0; // TODO 주사위 책임으로(?)
+        this.chanceToRoll = 0;
+        this.countOfDouble = 0;
         this.properties = new ArrayList<Property>();
         this.prisonTerm = 0;
     }
 
-    public void takeTurn(List<Die> dice) {
-        retrieveChanceToRoll();
-        while (chanceToRoll) {
+    public void takeTurn() {
+        addChanceToRoll();
+        while (chanceToRoll > 0) {
             System.out.println("플레이어 " + id + "의 차례입니다.");
-            int numOfMove = rollDice(dice);
+            int numOfMove = rollDice();
 
-            if (isThirdDouble()) {
-                System.out.println("더블이 연속 3회 나왔습니다. 감옥으로 가세요.");
-                yieldChanceToRoll();
-                
-                // TODO 감옥으로 가는 로직
-                break;
+            if (handleDouble()) {
+                break; // 세 번째 더블일 경우 턴 종료
+            } else {
+                piece.goForward(numOfMove);
             }
 
-            piece.goForward(numOfMove);
-
-            // TODO 이동 후 액션에 관한 로직
+            chanceToRoll--; // 기회 감소
         }
+        // TODO 이동 후 액션에 관한 로직
     }
 
-    private int rollDice(List<Die> dice) {
-        Die firstDie = dice.get(0);
-        Die secondDie = dice.get(1);
-
+    public int rollDice() {
+        Cup cup = Cup.getInstance();
         System.out.println("주사위를 굴립니다.");
-        int faceValueOfFirstDie = firstDie.roll();
-        int faceValueOfSecondDie = secondDie.roll();
+        cup.roll();
+        return cup.getTotal();
+    }
 
-        System.out.println("첫 번째 주사위의 눈: " + faceValueOfFirstDie);
-        System.out.println("두 번째 주사위의 눈: " + faceValueOfSecondDie);
-
-        if (isDouble(faceValueOfFirstDie, faceValueOfSecondDie)) {
-            System.out.println("더블입니다.");
+    private boolean handleDouble() {
+        if (isDouble()) {
             countOfDouble++;
-        } else{
-            yieldChanceToRoll();
-        }
-
-        return faceValueOfFirstDie + faceValueOfSecondDie;
-    }
-
-    private void retrieveChanceToRoll() {
-        chanceToRoll = true;
-    }
-
-    private void yieldChanceToRoll() {
-        chanceToRoll = false;
-        resetDoubleCount();
-    }
-
-    // TODO 주사위 책임으로(?)
-    private boolean isDouble(int faceValueOfFirstDie, int faceValueOfSecondDie) {
-        if (faceValueOfFirstDie == faceValueOfSecondDie) {
-            return true;
+            if (isThirdDouble()) {
+                System.out.println("더블이 연속 3회 나왔습니다. 감옥으로 갑니다.");
+                sendToJail();
+                resetCountOfDouble();
+                return true; // 턴 종료
+            } else {
+                System.out.println("더블이 나왔습니다. 한 번 더 주사위를 굴립니다.");
+                addChanceToRoll();
+            }
         } else {
-            return false;
+            resetCountOfDouble();
         }
+        return false;
     }
 
-    // TODO 주사위 책임으로(?)
+    private void sendToJail() {
+        piece.setLocation(Board.squares.get(SquareType.JAIL.getIndex()));
+    }
+
+    private void addChanceToRoll() {
+        chanceToRoll++;
+    }
+
+    private boolean isDouble() {
+        return Cup.getInstance().isDouble();
+    }
+
     private boolean isThirdDouble() {
-        if (countOfDouble == MAX_COUNT_OF_DOUBLE) {
-            return true;
-        } else {
-            return false;
-        }
+        return countOfDouble == MAX_COUNT_OF_DOUBLE;
     }
 
-    // TODO 주사위 책임으로(?)
-    private void resetDoubleCount() {
+    private void resetCountOfDouble() {
         countOfDouble = 0;
     }
 
@@ -168,10 +159,6 @@ public class Player {
             }
         }
         return count;
-    }
-
-    public int rollDiceForUtilityRent() {
-        return new Die("1").roll() + new Die("2").roll();
     }
 
     public void setPrisonTerm(int prisonTerm) {

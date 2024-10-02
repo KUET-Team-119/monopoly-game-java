@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import domain.component.Board;
-import domain.component.Die;
+import domain.component.Cup;
 import domain.player.Player;
 
 import java.util.ArrayList;
@@ -15,18 +15,15 @@ public class MonopolyGame {
     Scanner scanner;
     String id;
     List<Player> players;
-    List<Die> dice;
+    Cup cup;
     Board board;
 
     public MonopolyGame(Scanner scanner, String id) {
         this.scanner = scanner;
         this.id = id;
         players = new ArrayList<Player>();
-        dice = new ArrayList<Die>();
+        cup = Cup.getInstance();
         board = new Board();
-
-        dice.add(new Die("1"));
-        dice.add(new Die("2"));
     }
 
     public void initialize() {
@@ -53,7 +50,7 @@ public class MonopolyGame {
 
     private void playRound() {
         for (Player player : players) {
-            player.takeTurn(dice);
+            player.takeTurn();
         }
     }
 

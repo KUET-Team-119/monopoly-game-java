@@ -8,7 +8,7 @@ public class UtilityProperty extends Property {
     @Override
     public int getRent() {
         int count = owner.countUtilityProperty();
-        int faceValue = owner.rollDiceForUtilityRent();
+        int faceValue = owner.rollDice();
         if (count == 1) {
             return faceValue * 4;
         }
