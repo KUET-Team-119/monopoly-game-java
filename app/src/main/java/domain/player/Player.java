@@ -23,18 +23,28 @@ public class Player {
     private int countOfDouble;
     private List<Property> properties;
     private int prisonTerm;
+    private PrisonManager prisonManager;
 
     public Player(String id) {
         this.id = id;
-        this.piece = new Piece(id);
-        this.cash = 1_500_000;
+        this.piece = new Piece(id, this);
+        this.cash = 1_500;
         this.chanceToRoll = 0;
         this.countOfDouble = 0;
         this.properties = new ArrayList<Property>();
         this.prisonTerm = 0;
+        this.prisonManager = new PrisonManager(this);
     }
 
     public void takeTurn() {
+        if (isInPrison()) {
+            prisonManager.handlePrisonTurn();
+        } else {
+            playNormalTurn();
+        }
+    }
+
+    public void playNormalTurn() {
         addChanceToRoll();
         while (chanceToRoll > 0) {
             System.out.println("플레이어 " + id + "의 차례입니다.");
@@ -46,9 +56,8 @@ public class Player {
                 piece.goForward(numOfMove);
             }
 
-            chanceToRoll--; // 기회 감소
+            chanceToRoll--;
         }
-        // TODO 이동 후 액션에 관한 로직
     }
 
     public int rollDice() {
@@ -67,7 +76,7 @@ public class Player {
                 resetCountOfDouble();
                 return true; // 턴 종료
             } else {
-                System.out.println("더블이 나왔습니다. 한 번 더 주사위를 굴립니다.");
+                System.out.println("더블이 나왔습니다. 한 번 더 주사위를 굴릴 수 있습니다.");
                 addChanceToRoll();
             }
         } else {
@@ -78,6 +87,7 @@ public class Player {
 
     private void sendToJail() {
         piece.setLocation(Board.squares.get(SquareType.JAIL.getIndex()));
+        prisonTerm = 3; // 감옥에 가면 수감 기간을 3으로 설정
     }
 
     private void addChanceToRoll() {
@@ -94,6 +104,36 @@ public class Player {
 
     private void resetCountOfDouble() {
         countOfDouble = 0;
+    }
+
+    private boolean isInPrison() {
+        return prisonTerm > 0;
+    }
+
+    public void resetPrisonTerm() {
+        prisonTerm = 0;
+    }
+
+    public boolean canPayBail() {
+        return cash >= PrisonManager.BAIL_AMOUNT;
+    }
+
+    public void payBailAndLeavePrison(int amount) {
+        reduceCash(amount);
+        prisonTerm = 0;
+        System.out.println("보석금을 내고 감옥에서 나갑니다.");
+    }
+
+    public int getPrisonTerm() {
+        return prisonTerm;
+    }
+
+    public void setPrisonTerm(int prisonTerm) {
+        this.prisonTerm = prisonTerm;
+    }
+
+    public void reducePrisonTerm() {
+        prisonTerm--;
     }
 
     public void attemptPurchase(PropertySquare square, int price) {
@@ -159,9 +199,5 @@ public class Player {
             }
         }
         return count;
-    }
-
-    public void setPrisonTerm(int prisonTerm) {
-        this.prisonTerm = prisonTerm;
     }
 }
