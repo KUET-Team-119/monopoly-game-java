@@ -5,6 +5,7 @@ import domain.component.property.LotProperty;
 public class LotSquare extends PropertySquare {
 
     public LotSquare(int id, String name, int price) {
+        super(id, name);
         this.property = new LotProperty(id, name, price);
     }
 

@@ -50,9 +50,13 @@ public class SquareFactory {
                 return new IncomeTaxSquare(id, squareType.getName());
             case LUXURY_TAX:
                 return new LuxuryTaxSquare(id, squareType.getName());
-            case SOCIAL_FUND:
+            case SOCIAL_FUND_2:
+            case SOCIAL_FUND_17:
+            case SOCIAL_FUND_33:
                 return new SocialFundSquare(id, squareType.getName());
-            case CHANCE:
+            case CHANCE_7:
+            case CHANCE_22:
+            case CHANCE_36:
                 return new ChanceSquare(id, squareType.getName());
             default:
                 throw new IllegalArgumentException("Unknown square type: " + squareType);
