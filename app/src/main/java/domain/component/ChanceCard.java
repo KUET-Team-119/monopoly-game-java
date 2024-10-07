@@ -1,2 +1,5 @@
-package domain.component;public class ChanceCard {
+package domain.component;
+
+public abstract class ChanceCard extends Card {
+
 }
