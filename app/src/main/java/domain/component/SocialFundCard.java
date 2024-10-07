@@ -1,2 +1,4 @@
-package domain.component;public class SocialFundCard {
+package domain.component;
+
+public abstract class SocialFundCard extends Card {
 }
