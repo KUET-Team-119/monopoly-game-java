@@ -22,6 +22,11 @@ public class Piece {
         int currentLocationId = getLocation().getId();
         int destinationId = (currentLocationId + numOfMove) % Board.SQUARES_TOTAL;
         setLocation(Board.squares.get(destinationId));
+
+        if (isPassedGoSquare(destinationId, currentLocationId)) {
+            System.out.println("출발칸을 지나갔으니 월급 받으세요.");
+            player.addCash(200); // TODO 월급 하드코딩
+        }
     }
 
     public Square getLocation() {
@@ -32,6 +37,10 @@ public class Piece {
         this.location = destination;
         System.out.println(location.getName() +"에 도착했습니다.");
         location.landedOn(player);
+    }
+
+    private boolean isPassedGoSquare(int currentLocationId, int destinationId) {                
+        return destinationId < currentLocationId && destinationId != SquareType.GO.getIndex();
     }
 
     @Override
