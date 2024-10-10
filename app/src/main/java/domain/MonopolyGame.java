@@ -14,7 +14,7 @@ public class MonopolyGame {
 
     Scanner scanner;
     String id;
-    List<Player> players;
+    static List<Player> players;
     Cup cup;
     Board board;
 
@@ -30,6 +30,8 @@ public class MonopolyGame {
         int numOfPlayer = enterNumOfPlayer();
         generatePlayer(numOfPlayer);
         playGame();
+        // TO-DO 찬스카드, 사회기업카드 shuffle
+        // 카드 모음은 큐로 구현
     }
 
     private void playGame() {
@@ -72,7 +74,7 @@ public class MonopolyGame {
         }
     }
 
-    public List<Player> getPlayers() {
+    public static List<Player> getPlayers() {
         return players;
     }
 }
