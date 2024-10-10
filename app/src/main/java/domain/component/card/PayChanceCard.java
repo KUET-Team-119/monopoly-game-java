@@ -18,9 +18,11 @@ public class PayChanceCard extends ChanceCard {
     @Override
     void takeEffect(Player player) {
         List<Player> players = MonopolyGame.getPlayers();
-        players.remove(player);
 
         for (Player otherPlayer : players) {
+            if (otherPlayer == player) {
+                continue;
+            }
             player.reduceCash(payment);
             otherPlayer.addCash(payment);
         }
