@@ -39,6 +39,11 @@ public class Piece {
         location.landedOn(player);
     }
 
+    public void setLocationAndReceiveSalary(Square destination) {
+        setLocation(destination);
+        player.addCash(200);
+    }
+
     private boolean isPassedGoSquare(int currentLocationId, int destinationId) {                
         return destinationId < currentLocationId && destinationId != SquareType.GO.getIndex();
     }
