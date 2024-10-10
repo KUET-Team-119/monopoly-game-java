@@ -12,6 +12,6 @@ public class ForwardToGoSquareChanceCard extends ChanceCard {
     void takeEffect(Player player) {
         int currentLocationId = player.getPiece().getLocation().getId();
         // 항상 출발점에 도착하는지 확인 필요
-        player.getPiece().goForward(Board.SQUARES_TOTAL - currentLocationId);
+        player.getPiece().setLocation(Board.squares.get(currentLocationId));
     }
 }
