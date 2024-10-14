@@ -11,6 +11,6 @@ public class ForwardToJailSquareChanceCard extends ChanceCard {
 
     @Override
     void takeEffect(Player player) {
-        player.getPiece().setLocation(JAIL_SQUARE);
+        player.askForGoForward(SquareType.JAIL);
     }
 }
