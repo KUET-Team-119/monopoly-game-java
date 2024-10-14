@@ -5,6 +5,7 @@ import domain.player.Player;
 import monopolygame.App;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PayChanceCard extends ChanceCard {
 
@@ -17,14 +18,13 @@ public class PayChanceCard extends ChanceCard {
 
     @Override
     void takeEffect(Player player) {
-        List<Player> players = MonopolyGame.getPlayers();
+        List<Player> otherPlayers = MonopolyGame.getPlayers().stream()
+                                                        .filter(p -> p != player)
+                                                        .toList();
 
-        for (Player otherPlayer : players) {
-            if (otherPlayer == player) {
-                continue;
-            }
+        for (Player other : otherPlayers) {
             player.reduceCash(payment);
-            otherPlayer.addCash(payment);
+            other.addCash(payment);
         }
     }
 }
