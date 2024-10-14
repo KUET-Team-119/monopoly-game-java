@@ -12,7 +12,7 @@ public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
 
     @Override
     void takeEffect(Player player) {
-        int currentLocationId = player.getPiece().getLocation().getId();
+        int currentLocationId = player.currentLocation();
         Class<? extends Square> targetSquare = getTargetSquareClass();
 
         int destinationId = -1;
@@ -26,7 +26,7 @@ public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
         }
 
         if (destinationId != -1) {
-            player.getPiece().setLocation(Board.squares.get(destinationId));
+            player.askForNewLocation(destinationId);
             return;
         }
 
@@ -39,7 +39,7 @@ public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
             }
         }
 
-        player.getPiece().setLocationAndReceiveSalary(Board.squares.get(destinationId));
+        player.askForNewLocationAndSalary(destinationId);
     }
 
 }
