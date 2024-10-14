@@ -36,10 +36,6 @@ public class Cup {
     }
 
     public boolean isDouble() {
-        if (firstDie.getFaceValue() == secondDie.getFaceValue()) {
-            return true;
-        } else {
-            return false;
-        }
+        return firstDie.getFaceValue() == secondDie.getFaceValue();
     }
 }
