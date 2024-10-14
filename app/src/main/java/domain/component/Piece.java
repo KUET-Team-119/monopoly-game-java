@@ -61,4 +61,8 @@ public class Piece {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public int currentLocationId() {
+        return location.getId();
+    }
 }
