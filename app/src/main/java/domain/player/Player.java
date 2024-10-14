@@ -200,4 +200,20 @@ public class Player {
         }
         return count;
     }
+
+    public int currentLocation() {
+        return piece.currentLocationId();
+    }
+
+    public void askForGoForward(SquareType squareType) {
+        piece.goForward(Board.SQUARES_TOTAL - currentLocation() + squareType.getIndex());
+    }
+
+    public void askForNewLocation(int destinationId) {
+        piece.setLocation(Board.squares.get(destinationId));
+    }
+
+    public void askForNewLocationAndSalary(int destinationId) {
+        piece.setLocationAndReceiveSalary(Board.squares.get(destinationId));
+    }
 }
