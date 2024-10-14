@@ -2,7 +2,7 @@ package domain.component;
 
 public class Cup {
     private static Cup instance;
-
+    private static final Die die = new Die();
     private Die firstDie;
     private Die secondDie;
     private int total;
@@ -24,7 +24,8 @@ public class Cup {
         resetTotal();
         firstDie.roll();
         secondDie.roll();
-        total = firstDie.getFaceValue() + secondDie.getFaceValue();
+        total = die.calculateTotal(firstDie, secondDie);
+        //total = firstDie.getFaceValue() + secondDie.getFaceValue();
     }
 
     private void resetTotal() {
@@ -36,6 +37,6 @@ public class Cup {
     }
 
     public boolean isDouble() {
-        return firstDie.getFaceValue() == secondDie.getFaceValue();
+        return die.isSameFaceValue(firstDie, secondDie);
     }
 }
