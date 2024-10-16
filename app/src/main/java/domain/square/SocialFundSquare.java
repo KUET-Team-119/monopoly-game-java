@@ -1,5 +1,9 @@
 package domain.square;
 
+import java.util.Queue;
+
+import domain.MonopolyGame;
+import domain.component.card.Card;
 import domain.player.Player;
 
 public class SocialFundSquare extends Square {
@@ -11,8 +15,9 @@ public class SocialFundSquare extends Square {
 
     @Override
     public void landedOn(Player player) {
-        // TODO Auto-generated method stub
-        System.out.println("사회사업기금 칸에 도착했습니다.");
+        System.out.println("사회기금 카드를 한 장 뽑습니다.");
+        Queue<Card> socialFundCardDeck = MonopolyGame.socialFundCardDeck;
+        player.drawCard(socialFundCardDeck);
     }
     
 }

@@ -3,8 +3,10 @@ package domain.player;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Queue;
 
 import domain.component.Piece;
+import domain.component.card.Card;
 import domain.component.property.Property;
 import domain.component.property.RailRoadProperty;
 import domain.component.property.UtilityProperty;
@@ -199,5 +201,11 @@ public class Player {
             }
         }
         return count;
+    }
+
+    public void drawCard(Queue<Card> deck) {
+        Card card = deck.remove();
+        card.takeEffect(this);
+        deck.add(card);
     }
 }
