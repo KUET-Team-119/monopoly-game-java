@@ -39,7 +39,7 @@ public class SquareFactory {
             case UTILITY_WATER:
                 return new UtilitySquare(id, squareType.getName(), squareType.getPrice());
             case GO:
-                return new GoSquare(id, squareType.getName());
+                return new StartSquare(id, squareType.getName());
             case JAIL:
                 return new JailSquare(id, squareType.getName());
             case FREE_PARKING:

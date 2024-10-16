@@ -4,15 +4,16 @@ import domain.player.Player;
 
 public class DepositChanceCard extends ChanceCard {
 
-    private int deposit;
+    private int amount;
 
-    public DepositChanceCard(int deposit) {
-        super();
-        this.deposit = deposit;
+    public DepositChanceCard(int id, String name, int amount) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
     }
 
     @Override
-    void takeEffect(Player player) {
-        player.addCash(deposit);
+    public void takeEffect(Player player) {
+        player.addCash(amount);
     }
 }

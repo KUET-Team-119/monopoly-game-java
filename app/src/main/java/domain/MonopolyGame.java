@@ -79,7 +79,7 @@ public class MonopolyGame {
 
     private void generatePlayer(int numOfPlayer) {
         for (int i = 0; i < numOfPlayer; i++) {
-            players.add(new Player(Integer.toString(i)));
+            players.add(new Player(i));
         }
     }
 
@@ -93,7 +93,7 @@ public class MonopolyGame {
         Collections.shuffle((LinkedList<Card>) card);
     }
 
-    public List<Player> getPlayers() {
+    public static List<Player> getPlayers() {
         return players;
     }
 }

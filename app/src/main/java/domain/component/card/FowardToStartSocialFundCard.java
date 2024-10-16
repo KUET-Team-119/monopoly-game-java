@@ -5,11 +5,11 @@ import domain.player.Player;
 import domain.square.Square;
 import domain.square.SquareType;
 
-public class FowardToGoSquareCard extends SocialFundCard {
+public class FowardToStartSocialFundCard extends SocialFundCard {
     private final Square GO_SQUARE = Board.squares.get(SquareType.GO.getIndex());
 
-    FowardToGoSquareCard(int index, String name) {
-        this.index = index;
+    FowardToStartSocialFundCard(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

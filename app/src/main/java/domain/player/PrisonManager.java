@@ -35,7 +35,7 @@ public class PrisonManager {
         if (Cup.getInstance().isDouble()) {
             System.out.println("더블이 나왔습니다. 감옥에서 나갑니다!");
             player.resetPrisonTerm();
-            player.getPiece().goForward(rollResult);
+            player.getPiece().moveForward(rollResult);
         } else {
             System.out.println("더블이 나오지 않았습니다.");
             if (player.getPrisonTerm() == 0) {
@@ -43,7 +43,7 @@ public class PrisonManager {
                 if (player.canPayBail()) {
                     player.payBailAndLeavePrison(BAIL_AMOUNT);
                     player.resetPrisonTerm();
-                    player.getPiece().goForward(rollResult);
+                    player.getPiece().moveForward(rollResult);
                 } else {
                     // TODO 파산이 맞는지 확인 필요
                     System.out.println("보석금을 낼 수 없습니다. 파산했습니다.");

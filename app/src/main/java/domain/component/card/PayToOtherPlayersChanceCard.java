@@ -2,21 +2,20 @@ package domain.component.card;
 
 import domain.MonopolyGame;
 import domain.player.Player;
-import monopolygame.App;
 
 import java.util.List;
 
-public class PayChanceCard extends ChanceCard {
+public class PayToOtherPlayersChanceCard extends ChanceCard {
 
     private int payment;
 
-    public PayChanceCard(int payment) {
+    public PayToOtherPlayersChanceCard(int payment) {
         super();
         this.payment = payment;
     }
 
     @Override
-    void takeEffect(Player player) {
+    public void takeEffect(Player player) {
         List<Player> players = MonopolyGame.getPlayers();
         players.remove(player);
 

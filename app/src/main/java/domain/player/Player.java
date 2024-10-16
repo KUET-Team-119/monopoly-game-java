@@ -18,7 +18,7 @@ import domain.square.SquareType;
 public class Player {
     private static final int MAX_COUNT_OF_DOUBLE = 3;
 
-    private String id;
+    private int id;
     private Piece piece;
     private int cash;
     private int chanceToRoll;
@@ -27,7 +27,7 @@ public class Player {
     private int prisonTerm;
     private PrisonManager prisonManager;
 
-    public Player(String id) {
+    public Player(int id) {
         this.id = id;
         this.piece = new Piece(id, this);
         this.cash = 1_500;
@@ -55,7 +55,7 @@ public class Player {
             if (handleDouble()) {
                 break; // 세 번째 더블일 경우 턴 종료
             } else {
-                piece.goForward(numOfMove);
+                piece.moveForward(numOfMove);
             }
 
             chanceToRoll--;
@@ -157,7 +157,7 @@ public class Player {
         return cash;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

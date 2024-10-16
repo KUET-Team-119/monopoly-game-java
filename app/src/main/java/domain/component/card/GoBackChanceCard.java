@@ -9,7 +9,7 @@ public class GoBackChanceCard extends ChanceCard {
     private final int BACK = 3;
 
     @Override
-    void takeEffect(Player player) {
+    public void takeEffect(Player player) {
         Piece piece = player.getPiece();
         int currentLocationId = piece.getLocation().getId();
 

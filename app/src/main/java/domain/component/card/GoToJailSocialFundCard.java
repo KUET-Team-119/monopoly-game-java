@@ -5,11 +5,11 @@ import domain.player.Player;
 import domain.square.Square;
 import domain.square.SquareType;
 
-public class GoToJailCard extends SocialFundCard {
+public class GoToJailSocialFundCard extends SocialFundCard {
     private final Square JAIL_SQUARE = Board.squares.get(SquareType.JAIL.getIndex());
 
-    public GoToJailCard(int index, String name) {
-        this.index = index;
+    public GoToJailSocialFundCard(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

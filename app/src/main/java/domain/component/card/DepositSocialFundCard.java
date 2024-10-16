@@ -2,18 +2,18 @@ package domain.component.card;
 
 import domain.player.Player;
 
-public class WithdrawCashCard extends SocialFundCard{
+public class DepositSocialFundCard extends SocialFundCard {
 
     private int amount;
 
-    public WithdrawCashCard(int index, String name, int amount) {
-        this.index = index;
+    public DepositSocialFundCard(int id, String name, int amount) {
+        this.id = id;
         this.name = name;
         this.amount = amount;
     }
 
     @Override
     public void takeEffect(Player player) {
-        player.reduceCash(amount);
+        player.addCash(amount);
     }
 }

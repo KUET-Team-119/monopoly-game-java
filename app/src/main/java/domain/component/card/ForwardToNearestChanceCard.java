@@ -2,16 +2,14 @@ package domain.component.card;
 
 import domain.component.Board;
 import domain.player.Player;
-import domain.square.PropertySquare;
 import domain.square.Square;
-import domain.square.UtilitySquare;
 
-public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
+public abstract class ForwardToNearestChanceCard extends ChanceCard {
 
     protected abstract Class<? extends Square> getTargetSquareClass();
 
     @Override
-    void takeEffect(Player player) {
+    public void takeEffect(Player player) {
         int currentLocationId = player.getPiece().getLocation().getId();
         Class<? extends Square> targetSquare = getTargetSquareClass();
 
