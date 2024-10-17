@@ -4,15 +4,15 @@ import domain.player.Player;
 
 public class WithdrawChanceCard extends ChanceCard {
 
-    private int withdraw;
+    private int amount;
 
-    public WithdrawChanceCard(int withdraw) {
+    public WithdrawChanceCard(int amount) {
         super();
-        this.withdraw = withdraw;
+        this.amount = amount;
     }
 
     @Override
-    void takeEffect(Player player) {
-        player.reduceCash(withdraw);
+    public void takeEffect(Player player) {
+        player.reduceCash(amount);
     }
 }

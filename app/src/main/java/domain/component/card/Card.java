@@ -3,8 +3,8 @@ package domain.component.card;
 import domain.player.Player;
 
 public abstract class Card {
-    private Long id;
-    private String name;
+    protected int id;
+    protected String name;
 
-    abstract void takeEffect(Player player);
+    public abstract void takeEffect(Player player);
 }

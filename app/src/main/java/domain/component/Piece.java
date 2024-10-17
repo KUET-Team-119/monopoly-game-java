@@ -7,17 +7,17 @@ import domain.square.Square;
 import domain.square.SquareType;
 
 public class Piece {
-    String name;
+    int id;
     Square location;
     Player player;
 
-    public Piece(String name, Player player) {
-        this.name = name;
+    public Piece(int id, Player player) {
+        this.id = id;
         this.player = player;
         this.location = Board.squares.get(SquareType.GO.getIndex());  // 출발점에서 시작
     }
 
-    public void goForward(int numOfMove) {
+    public void moveForward(int numOfMove) {
         System.out.println("앞으로 " + numOfMove + "칸 이동합니다.");
         int currentLocationId = getLocation().getId();
         int destinationId = (currentLocationId + numOfMove) % Board.SQUARES_TOTAL;
@@ -54,12 +54,12 @@ public class Piece {
             return true;
         if (!(object instanceof Piece piece))
             return false;
-        return Objects.equals(name, piece.name);
+        return Objects.equals(id, piece.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id);
     }
 
     public int currentLocationId() {

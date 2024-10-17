@@ -3,8 +3,10 @@ package domain.player;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Queue;
 
 import domain.component.Piece;
+import domain.component.card.Card;
 import domain.component.property.Property;
 import domain.component.property.RailRoadProperty;
 import domain.component.property.UtilityProperty;
@@ -16,7 +18,7 @@ import domain.square.SquareType;
 public class Player {
     private static final int MAX_COUNT_OF_DOUBLE = 3;
 
-    private String id;
+    private int id;
     private Piece piece;
     private int cash;
     private int chanceToRoll;
@@ -25,7 +27,7 @@ public class Player {
     private int prisonTerm;
     private PrisonManager prisonManager;
 
-    public Player(String id) {
+    public Player(int id) {
         this.id = id;
         this.piece = new Piece(id, this);
         this.cash = 1_500;
@@ -53,7 +55,7 @@ public class Player {
             if (handleDouble()) {
                 break; // 세 번째 더블일 경우 턴 종료
             } else {
-                piece.goForward(numOfMove);
+                piece.moveForward(numOfMove);
             }
 
             chanceToRoll--;
@@ -155,7 +157,7 @@ public class Player {
         return cash;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -201,19 +203,9 @@ public class Player {
         return count;
     }
 
-    public int currentLocation() {
-        return piece.currentLocationId();
-    }
-
-    public void askForGoForward(SquareType squareType) {
-        piece.goForward(Board.SQUARES_TOTAL - currentLocation() + squareType.getIndex());
-    }
-
-    public void askForNewLocation(int destinationId) {
-        piece.setLocation(Board.squares.get(destinationId));
-    }
-
-    public void askForNewLocationAndSalary(int destinationId) {
-        piece.setLocationAndReceiveSalary(Board.squares.get(destinationId));
+    public void drawCard(Queue<Card> deck) {
+        Card card = deck.remove();
+        card.takeEffect(this);
+        deck.add(card);
     }
 }

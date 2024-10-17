@@ -2,11 +2,11 @@ package domain.component.card;
 
 import domain.player.Player;
 
-public class DepositChanceCard extends ChanceCard {
+public class DepositSocialFundCard extends SocialFundCard {
 
     private int amount;
 
-    public DepositChanceCard(int id, String name, int amount) {
+    public DepositSocialFundCard(int id, String name, int amount) {
         this.id = id;
         this.name = name;
         this.amount = amount;

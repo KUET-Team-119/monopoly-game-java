@@ -5,12 +5,12 @@ import domain.player.Player;
 import domain.square.Square;
 import domain.square.SquareType;
 
-public class ForwardToJailSquareChanceCard extends ChanceCard {
+public class GoToJailChanceCard extends ChanceCard {
 
     private final Square JAIL_SQUARE = Board.squares.get(SquareType.JAIL.getIndex());
 
     @Override
-    void takeEffect(Player player) {
-        player.askForGoForward(SquareType.JAIL);
+    public void takeEffect(Player player) {
+        player.getPiece().setLocation(JAIL_SQUARE);
     }
 }
