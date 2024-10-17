@@ -1,5 +1,7 @@
 package domain.player;
 
+import domain.square.Square;
+import domain.square.SquareFactory;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -207,5 +209,25 @@ public class Player {
         Card card = deck.remove();
         card.takeEffect(this);
         deck.add(card);
+    }
+
+    public void askForMoveForward(SquareType squareType) {
+        piece.moveForward(Board.SQUARES_TOTAL - currentLocationId() + squareType.getIndex());
+    }
+
+    private int currentLocationId() {
+        return piece.locationId();
+    }
+
+    public void askForSetLocation(Square location) {
+        piece.setLocation(location);
+    }
+
+    public void askForSetLocationAndReceiveSalary(Square location) {
+        piece.setLocationAndReceiveSalary(location);
+    }
+
+    public void askForGoBack(int back) {
+        piece.setLocation(Board.squares.get(currentLocationId() - back));
     }
 }

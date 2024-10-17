@@ -17,16 +17,8 @@ public class Die {
         System.out.println("주사위의 눈: " + faceValue);
     }
 
-//    public int getFaceValue() {
-//        return faceValue;
-//    }
-
-    public int calculateTotal(Die firstDie, Die secondDie) {
-        return firstDie.faceValue + secondDie.faceValue;
-    }
-
-    public boolean isSameFaceValue(Die firstDie, Die secondDie) {
-        return firstDie.faceValue == secondDie.faceValue;
+    public int getFaceValue() {
+        return faceValue;
     }
 
     // @Override

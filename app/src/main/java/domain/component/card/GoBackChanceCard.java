@@ -8,11 +8,13 @@ public class GoBackChanceCard extends ChanceCard {
 
     private final int BACK = 3;
 
+    public GoBackChanceCard(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Override
     public void takeEffect(Player player) {
-        Piece piece = player.getPiece();
-        int currentLocationId = piece.getLocation().getId();
-
-        piece.setLocation(Board.squares.get(currentLocationId - BACK));
+        player.askForGoBack(BACK);
     }
 }

@@ -1,5 +1,7 @@
 package domain;
 
+import domain.component.card.ChanceCardFactory;
+import domain.component.card.ChanceCardType;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Queue;
@@ -22,6 +24,7 @@ public class MonopolyGame {
     static List<Player> players; // TODO 다른 사람들에게 돈 받는 사회기금 카드 로직 때문에 임시로 public static으로 지정
     Cup cup;
     Board board;
+    public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
 
     public MonopolyGame(Scanner scanner, String id) {
@@ -36,8 +39,10 @@ public class MonopolyGame {
     public void initialize() {
         int numOfPlayer = enterNumOfPlayer();
         generatePlayer(numOfPlayer);
-        buildSocialFundDeck();
-        shuffleCardDeck(socialFundCardDeck);
+        buildDeck(ChanceCardType.values());
+        buildDeck(SocialFundCardType.values());
+        shuffleDeck(chanceCardDeck);
+        shuffleDeck(socialFundCardDeck);
         playGame();
         // TO-DO 찬스카드, 사회기업카드 shuffle
         // 카드 모음은 큐로 구현
@@ -83,13 +88,19 @@ public class MonopolyGame {
         }
     }
 
-    private void buildSocialFundDeck() {
-        for (SocialFundCardType type : SocialFundCardType.values()) {
-            socialFundCardDeck.add(SocialFundCardFactory.createSquare(type));
+    private void buildDeck(ChanceCardType[] values) {
+        for (ChanceCardType type : values) {
+            chanceCardDeck.add(ChanceCardFactory.createSquare(type));
         }
     }
 
-    private void shuffleCardDeck(Queue<Card> card) {
+    private void buildDeck(SocialFundCardType[] values) {
+        for (SocialFundCardType type : values) {
+            chanceCardDeck.add(SocialFundCardFactory.createSquare(type));
+        }
+    }
+
+    private void shuffleDeck(Queue<Card> card) {
         Collections.shuffle((LinkedList<Card>) card);
     }
 

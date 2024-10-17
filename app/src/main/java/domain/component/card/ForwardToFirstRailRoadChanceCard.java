@@ -1,13 +1,17 @@
 package domain.component.card;
 
-import domain.component.Board;
 import domain.player.Player;
 import domain.square.SquareType;
 
-public class ForwardToFirstRailRoadSquareChanceCard extends ChanceCard {
+public class ForwardToFirstRailRoadChanceCard extends ChanceCard {
+
+    public ForwardToFirstRailRoadChanceCard(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
-    void takeEffect(Player player) {
-        player.askForGoForward(SquareType.RAILROAD_GWANGJU);
+    public void takeEffect(Player player) {
+        player.askForMoveForward(SquareType.RAILROAD_GWANGJU);
     }
 }

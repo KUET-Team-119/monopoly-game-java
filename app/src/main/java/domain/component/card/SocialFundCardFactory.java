@@ -18,8 +18,8 @@ public class SocialFundCardFactory {
             case WITHDRAW_100_CASH:
             case WITHDRAW_50_CASH:
                 return new WithdrawSocialFundCard(index, socialFundCardType.getName(), socialFundCardType.getAmount());
-            case FOWARD_TO_GO_SQUARE:
-                return new FowardToStartSocialFundCard(index, socialFundCardType.getName());
+            case FORWARD_TO_START_SQUARE:
+                return new ForwardToStartSocialFundCard(index, socialFundCardType.getName());
             case RECEIVE_10_CASH_FROM_OTHER_PLAYERS:
                 return new ReceiveFromOtherPlayersSocialFundCard(index, socialFundCardType.getName(), socialFundCardType.getAmount());
             case GO_TO_JAIL:

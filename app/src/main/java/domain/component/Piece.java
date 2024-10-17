@@ -14,7 +14,7 @@ public class Piece {
     public Piece(int id, Player player) {
         this.id = id;
         this.player = player;
-        this.location = Board.squares.get(SquareType.GO.getIndex());  // 출발점에서 시작
+        this.location = Board.squares.get(SquareType.START.getIndex());  // 출발점에서 시작
     }
 
     public void moveForward(int numOfMove) {
@@ -45,7 +45,7 @@ public class Piece {
     }
 
     private boolean isPassedGoSquare(int currentLocationId, int destinationId) {                
-        return destinationId < currentLocationId && destinationId != SquareType.GO.getIndex();
+        return destinationId < currentLocationId && destinationId != SquareType.START.getIndex();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Piece {
         return Objects.hash(id);
     }
 
-    public int currentLocationId() {
+    public int locationId() {
         return location.getId();
     }
 }

@@ -1,7 +1,7 @@
 package domain.legacy;
 
 public class RegularSquare extends Square {
-    public RegularSquare(String name, int index) {
+    public RegularSquare(String name) {
         super(name, index);
     }
 

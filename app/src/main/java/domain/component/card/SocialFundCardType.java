@@ -1,7 +1,7 @@
 package domain.component.card;
 
 public enum SocialFundCardType {
-    FOWARD_TO_GO_SQUARE(0, "출발점으로 전진", 0),
+    FORWARD_TO_START_SQUARE(0, "출발점으로 전진", 0),
     DEPOSIT_200_CASH(1, "은행에게 200원 받기", 200),
     DEPOSIT_100_CASH(2, "은행에게 100원 받기", 100),
     DEPOSIT_50_CASH(3, "은행에게 50원 받기", 50),

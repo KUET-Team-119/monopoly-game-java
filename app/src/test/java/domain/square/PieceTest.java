@@ -1,18 +1,17 @@
-//  package domain.square;
+ package domain.square;
 
-//  import org.junit.jupiter.api.Test;
+ import domain.component.Piece;
+ import domain.player.Player;
+ import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.api.DisplayName;
+ import static org.junit.jupiter.api.Assertions.*;
+ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// import domain.component.Piece;
-
-// import org.junit.jupiter.api.DisplayName;
-//  import static org.junit.jupiter.api.Assertions.*;
-//  import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-//  public class PieceTest {
-//      @Test
-//      @DisplayName("Piece 생성 테스트")
-//      void 생성() {
-//          Piece piece = new Piece("chori");
-//          assertThat(piece).isEqualTo(new Piece("chori"));
-//      }
-//  }
+ public class PieceTest {
+     @Test
+     @DisplayName("Piece 생성 테스트")
+     void 생성() {
+         Piece piece = new Piece(1, new Player(1));
+         assertThat(piece).isEqualTo(new Piece(1, new Player(1)));
+     }
+ }

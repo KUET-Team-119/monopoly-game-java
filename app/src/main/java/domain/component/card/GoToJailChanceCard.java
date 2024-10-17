@@ -7,10 +7,13 @@ import domain.square.SquareType;
 
 public class GoToJailChanceCard extends ChanceCard {
 
-    private final Square JAIL_SQUARE = Board.squares.get(SquareType.JAIL.getIndex());
+    public GoToJailChanceCard(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public void takeEffect(Player player) {
-        player.getPiece().setLocation(JAIL_SQUARE);
+        player.askForSetLocation(Board.squares.get(SquareType.JAIL.getIndex()));
     }
 }

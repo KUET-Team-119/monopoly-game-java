@@ -2,17 +2,20 @@ package domain.component.card;
 
 import domain.component.Board;
 import domain.player.Player;
-import domain.square.PropertySquare;
 import domain.square.Square;
-import domain.square.UtilitySquare;
 
-public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
+public abstract class ForwardToNearestChanceCard extends ChanceCard {
+
+    public ForwardToNearestChanceCard(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     protected abstract Class<? extends Square> getTargetSquareClass();
 
     @Override
-    void takeEffect(Player player) {
-        int currentLocationId = player.currentLocation();
+    public void takeEffect(Player player) {
+        int currentLocationId = player.getPiece().getLocation().getId();
         Class<? extends Square> targetSquare = getTargetSquareClass();
 
         int destinationId = -1;
@@ -26,7 +29,7 @@ public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
         }
 
         if (destinationId != -1) {
-            player.askForNewLocation(destinationId);
+            player.askForSetLocation(Board.squares.get(destinationId));
             return;
         }
 
@@ -39,7 +42,7 @@ public abstract class ForwardToNearestSquareChanceCard extends ChanceCard {
             }
         }
 
-        player.askForNewLocationAndSalary(destinationId);
+        player.askForSetLocationAndReceiveSalary(Board.squares.get(destinationId));
     }
 
 }

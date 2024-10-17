@@ -1,7 +1,7 @@
 package domain.square;
 
 public enum SquareType {
-    GO(0, "출발점", 0),
+    START(0, "출발점", 0),
     LOT_SUWON(1, "수원", 60),
     SOCIAL_FUND_2(2, "사회사업기금", 0),
     LOT_YONGIN(3, "용인", 60),
