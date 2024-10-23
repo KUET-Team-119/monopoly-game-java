@@ -3,7 +3,7 @@ package domain.component.card;
 public class SocialFundCardFactory {
     private static int indexCounter = -1;
 
-    public static SocialFundCard createSquare(SocialFundCardType socialFundCardType) {
+    public static SocialFundCard createSocialFundCards(SocialFundCardType socialFundCardType) {
         int index = ++indexCounter;
 
         switch (socialFundCardType) {

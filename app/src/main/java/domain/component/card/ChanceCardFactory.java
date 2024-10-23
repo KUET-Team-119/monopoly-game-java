@@ -3,7 +3,7 @@ package domain.component.card;
 public class ChanceCardFactory {
     private static int indexCounter = -1;
 
-    public static ChanceCard createSquare(ChanceCardType chanceCardType) {
+    public static ChanceCard createChanceCards(ChanceCardType chanceCardType) {
         int index = ++indexCounter;
 
         switch (chanceCardType) {

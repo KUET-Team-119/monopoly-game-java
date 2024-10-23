@@ -90,13 +90,13 @@ public class MonopolyGame {
 
     private void buildDeck(ChanceCardType[] values) {
         for (ChanceCardType type : values) {
-            chanceCardDeck.add(ChanceCardFactory.createSquare(type));
+            chanceCardDeck.add(ChanceCardFactory.createChanceCards(type));
         }
     }
 
     private void buildDeck(SocialFundCardType[] values) {
         for (SocialFundCardType type : values) {
-            chanceCardDeck.add(SocialFundCardFactory.createSquare(type));
+            chanceCardDeck.add(SocialFundCardFactory.createSocialFundCards(type));
         }
     }
 
