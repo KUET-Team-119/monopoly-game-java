@@ -7,8 +7,8 @@ public abstract class PropertySquare extends Square {
     protected boolean soldOut = false;
     protected Property property;
 
-    public PropertySquare(int id, String name) {
-        this.id = id;
+    public PropertySquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

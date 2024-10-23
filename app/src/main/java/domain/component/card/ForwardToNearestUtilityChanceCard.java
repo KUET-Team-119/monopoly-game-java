@@ -5,8 +5,8 @@ import domain.square.UtilitySquare;
 
 public class ForwardToNearestUtilityChanceCard extends ForwardToNearestChanceCard {
 
-    public ForwardToNearestUtilityChanceCard(int id, String name) {
-        super(id, name);
+    public ForwardToNearestUtilityChanceCard(int index, String name) {
+        super(index, name);
     }
 
     @Override

@@ -6,8 +6,8 @@ public class DepositSocialFundCard extends SocialFundCard {
 
     private int amount;
 
-    public DepositSocialFundCard(int id, String name, int amount) {
-        this.id = id;
+    public DepositSocialFundCard(int index, String name, int amount) {
+        this.index = index;
         this.name = name;
         this.amount = amount;
     }

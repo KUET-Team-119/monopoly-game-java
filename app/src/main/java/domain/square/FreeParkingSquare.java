@@ -4,8 +4,8 @@ import domain.player.Player;
 
 public class FreeParkingSquare extends Square{
 
-    public FreeParkingSquare(int id, String name) {
-        this.id = id;
+    public FreeParkingSquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

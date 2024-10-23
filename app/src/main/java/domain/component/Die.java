@@ -1,8 +1,6 @@
 package domain.component;
 
-// import java.util.Objects;
-
-import domain.util.RandomUtil;
+import util.RandomUtil;
 
 public class Die {
     private int faceValue;
@@ -20,18 +18,4 @@ public class Die {
     public int getFaceValue() {
         return faceValue;
     }
-
-    // @Override
-    // public boolean equals(Object o) {
-    //     if (this == o)
-    //         return true;
-    //     if (!(o instanceof Die die))
-    //         return false;
-    //     return Objects.equals(id, die.id);
-    // }
-
-    // @Override
-    // public int hashCode() {
-    //     return Objects.hash(id);
-    // }
 }

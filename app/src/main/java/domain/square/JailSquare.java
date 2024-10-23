@@ -4,8 +4,8 @@ import domain.player.Player;
 
 public class JailSquare extends Square {
 
-    public JailSquare(int id, String name) {
-        this.id = id;
+    public JailSquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

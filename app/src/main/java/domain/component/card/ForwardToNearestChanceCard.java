@@ -6,8 +6,8 @@ import domain.square.Square;
 
 public abstract class ForwardToNearestChanceCard extends ChanceCard {
 
-    public ForwardToNearestChanceCard(int id, String name) {
-        this.id = id;
+    public ForwardToNearestChanceCard(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

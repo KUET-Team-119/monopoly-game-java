@@ -8,8 +8,8 @@ import domain.player.Player;
 
 public class SocialFundSquare extends Square {
 
-    public SocialFundSquare(int id, String name) {
-        this.id = id;
+    public SocialFundSquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

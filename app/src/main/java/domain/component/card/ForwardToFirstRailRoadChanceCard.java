@@ -5,8 +5,8 @@ import domain.square.SquareType;
 
 public class ForwardToFirstRailRoadChanceCard extends ChanceCard {
 
-    public ForwardToFirstRailRoadChanceCard(int id, String name) {
-        this.id = id;
+    public ForwardToFirstRailRoadChanceCard(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

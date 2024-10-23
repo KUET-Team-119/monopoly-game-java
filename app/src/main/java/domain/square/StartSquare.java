@@ -5,8 +5,8 @@ import domain.player.Player;
 public class StartSquare extends Square{
     private final int SALARY = 200;
 
-    public StartSquare(int id, String name) {
-        this.id = id;
+    public StartSquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

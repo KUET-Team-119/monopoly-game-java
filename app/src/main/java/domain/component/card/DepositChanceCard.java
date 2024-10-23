@@ -6,8 +6,8 @@ public class DepositChanceCard extends ChanceCard {
 
     private int amount;
 
-    public DepositChanceCard(int id, String name, int amount) {
-        this.id = id;
+    public DepositChanceCard(int index, String name, int amount) {
+        this.index = index;
         this.name = name;
         this.amount = amount;
     }

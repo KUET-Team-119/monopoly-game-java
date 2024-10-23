@@ -6,8 +6,8 @@ public class WithdrawChanceCard extends ChanceCard {
 
     private int amount;
 
-    public WithdrawChanceCard(int id, String name, int amount) {
-        this.id = id;
+    public WithdrawChanceCard(int index, String name, int amount) {
+        this.index = index;
         this.name = name;
         this.amount = amount;
     }

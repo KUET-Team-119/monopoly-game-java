@@ -2,13 +2,12 @@ package domain.component.card;
 
 import domain.component.Board;
 import domain.player.Player;
-import domain.square.Square;
 import domain.square.SquareType;
 
 public class GoToJailChanceCard extends ChanceCard {
 
-    public GoToJailChanceCard(int id, String name) {
-        this.id = id;
+    public GoToJailChanceCard(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

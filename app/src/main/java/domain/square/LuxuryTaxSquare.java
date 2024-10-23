@@ -5,8 +5,8 @@ import domain.player.Player;
 public class LuxuryTaxSquare extends Square {
     private final int TAX = 100;
 
-    public LuxuryTaxSquare(int id, String name) {
-        this.id = id;
+    public LuxuryTaxSquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

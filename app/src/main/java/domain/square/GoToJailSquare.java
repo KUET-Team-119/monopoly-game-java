@@ -7,8 +7,8 @@ public class GoToJailSquare extends Square {
     private final Square JAIL_SQUARE = Board.squares.get(SquareType.JAIL.getIndex());
     private final int PRISON_TERM = 3;
 
-    public GoToJailSquare(int id, String name) {
-        this.id = id;
+    public GoToJailSquare(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

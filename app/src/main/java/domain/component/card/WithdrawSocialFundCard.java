@@ -6,8 +6,8 @@ public class WithdrawSocialFundCard extends SocialFundCard{
 
     private int amount;
 
-    public WithdrawSocialFundCard(int id, String name, int amount) {
-        this.id = id;
+    public WithdrawSocialFundCard(int index, String name, int amount) {
+        this.index = index;
         this.name = name;
         this.amount = amount;
     }

@@ -1,10 +1,10 @@
 package domain.square;
 
 public class SquareFactory {
-    private static int idCounter = -1;  // idCounter 초기값을 -1로 설정
+    private static int indexCounter = -1;
 
     public static Square createSquare(SquareType squareType) {
-        int id = ++idCounter;  // 고유한 ID 부여
+        int index = ++indexCounter;  // 고유한 인덱스 부여
 
         switch (squareType) {
             case LOT_SUWON:
@@ -29,35 +29,35 @@ public class SquareFactory {
             case LOT_DAEJEON:
             case LOT_INCHEON:
             case LOT_SEOUL:
-                return new LotSquare(id, squareType.getName(), squareType.getPrice());
+                return new LotSquare(index, squareType.getName(), squareType.getPrice());
             case RAILROAD_GWANGJU:
             case RAILROAD_BUSAN:
             case RAILROAD_CHUNCHEON:
             case RAILROAD_SEOUL:
-                return new RailRoadSquare(id, squareType.getName(), squareType.getPrice());
+                return new RailRoadSquare(index, squareType.getName(), squareType.getPrice());
             case UTILITY_ELECTRIC:
             case UTILITY_WATER:
-                return new UtilitySquare(id, squareType.getName(), squareType.getPrice());
+                return new UtilitySquare(index, squareType.getName(), squareType.getPrice());
             case START:
-                return new StartSquare(id, squareType.getName());
+                return new StartSquare(index, squareType.getName());
             case JAIL:
-                return new JailSquare(id, squareType.getName());
+                return new JailSquare(index, squareType.getName());
             case FREE_PARKING:
-                return new FreeParkingSquare(id, squareType.getName());
+                return new FreeParkingSquare(index, squareType.getName());
             case GO_TO_JAIL:
-                return new GoToJailSquare(id, squareType.getName());
+                return new GoToJailSquare(index, squareType.getName());
             case INCOME_TAX:
-                return new IncomeTaxSquare(id, squareType.getName());
+                return new IncomeTaxSquare(index, squareType.getName());
             case LUXURY_TAX:
-                return new LuxuryTaxSquare(id, squareType.getName());
+                return new LuxuryTaxSquare(index, squareType.getName());
             case SOCIAL_FUND_2:
             case SOCIAL_FUND_17:
             case SOCIAL_FUND_33:
-                return new SocialFundSquare(id, squareType.getName());
+                return new SocialFundSquare(index, squareType.getName());
             case CHANCE_7:
             case CHANCE_22:
             case CHANCE_36:
-                return new ChanceSquare(id, squareType.getName());
+                return new ChanceSquare(index, squareType.getName());
             default:
                 throw new IllegalArgumentException("Unknown square type: " + squareType);
         }

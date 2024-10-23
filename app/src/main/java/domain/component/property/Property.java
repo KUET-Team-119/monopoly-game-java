@@ -1,17 +1,15 @@
 package domain.component.property;
 
-import java.util.Objects;
-
 import domain.player.Player;
 
 public abstract class Property {
-    int id;
+    int index;
     String name;
     int price;
     Player owner;
 
-    public Property(int id, String name, int price) {
-        this.id = id;
+    public Property(int index, String name, int price) {
+        this.index = index;
         this.name = name;
         this.price = price;
     }
@@ -29,19 +27,5 @@ public abstract class Property {
 
     public Player getOwner() {
         return owner;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Property property))
-            return false;
-        return this.id == property.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

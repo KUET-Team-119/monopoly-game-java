@@ -8,8 +8,8 @@ public class LotProperty extends Property {
     private int housePrice;
     private int hotelPrice;
 
-    public LotProperty(int id, String name, int price) {
-        super(id, name, price);
+    public LotProperty(int index, String name, int price) {
+        super(index, name, price);
     }
 
     private int getHouseRent() {

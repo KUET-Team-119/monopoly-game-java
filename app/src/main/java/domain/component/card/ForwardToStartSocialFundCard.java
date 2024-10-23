@@ -8,8 +8,8 @@ import domain.square.SquareType;
 public class ForwardToStartSocialFundCard extends SocialFundCard {
     private final Square GO_SQUARE = Board.squares.get(SquareType.START.getIndex());
 
-    ForwardToStartSocialFundCard(int id, String name) {
-        this.id = id;
+    ForwardToStartSocialFundCard(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

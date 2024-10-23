@@ -5,8 +5,8 @@ import domain.square.Square;
 
 public class ForwardToNearestRailRoadChanceCard extends ForwardToNearestChanceCard {
 
-    public ForwardToNearestRailRoadChanceCard(int id, String name) {
-        super(id, name);
+    public ForwardToNearestRailRoadChanceCard(int index, String name) {
+        super(index, name);
     }
 
     @Override

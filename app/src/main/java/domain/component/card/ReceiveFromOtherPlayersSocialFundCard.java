@@ -7,8 +7,8 @@ public class ReceiveFromOtherPlayersSocialFundCard extends SocialFundCard {
 
     private int amount;
 
-    public ReceiveFromOtherPlayersSocialFundCard(int id, String name, int amount) {
-        this.id = id;
+    public ReceiveFromOtherPlayersSocialFundCard(int index, String name, int amount) {
+        this.index = index;
         this.name = name;
         this.amount = amount;
     }

@@ -1,13 +1,12 @@
 package domain.component.card;
 
-import domain.component.Board;
 import domain.player.Player;
 import domain.square.SquareType;
 
 public class ForwardToStartChanceCard extends ChanceCard {
 
-    public ForwardToStartChanceCard(int id, String name) {
-        this.id = id;
+    public ForwardToStartChanceCard(int index, String name) {
+        this.index = index;
         this.name = name;
     }
 

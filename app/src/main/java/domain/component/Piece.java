@@ -1,17 +1,15 @@
 package domain.component;
 
-import java.util.Objects;
-
 import domain.player.Player;
 import domain.square.Square;
 import domain.square.SquareType;
 
 public class Piece {
-    int id;
-    Square location;
-    Player player;
+    private String id;
+    private Square location;
+    private Player player;
 
-    public Piece(int id, Player player) {
+    public Piece(String id, Player player) {
         this.id = id;
         this.player = player;
         this.location = Board.squares.get(SquareType.START.getIndex());  // 출발점에서 시작
@@ -25,7 +23,7 @@ public class Piece {
 
         if (isPassedGoSquare(destinationId, currentLocationId)) {
             System.out.println("출발칸을 지나갔으니 월급 받으세요.");
-            player.addCash(200); // TODO 월급 하드코딩
+            player.addCash(200);
         }
     }
 
@@ -48,21 +46,11 @@ public class Piece {
         return destinationId < currentLocationId && destinationId != SquareType.START.getIndex();
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object)
-            return true;
-        if (!(object instanceof Piece piece))
-            return false;
-        return Objects.equals(id, piece.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    public int locationId() {
+    public int getLocationId() {
         return location.getId();
+    }
+
+    public String getId() {
+        return id;
     }
 }

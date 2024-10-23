@@ -4,11 +4,11 @@ import domain.player.Player;
 
 public abstract class Square {
 
-    protected int id;
+    protected int index;
     protected String name;
 
     public int getId() {
-        return id;
+        return index;
     }
 
     public String getName() {

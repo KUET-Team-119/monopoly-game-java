@@ -4,8 +4,8 @@ public class RailRoadProperty extends Property {
 
     private final int RAILROAD_RENT = 25;
 
-    public RailRoadProperty(int id, String name, int price) {
-        super(id, name, price);
+    public RailRoadProperty(int index, String name, int price) {
+        super(index, name, price);
     }
 
     @Override

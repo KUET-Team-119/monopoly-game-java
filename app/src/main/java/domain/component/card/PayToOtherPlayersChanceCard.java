@@ -9,8 +9,8 @@ public class PayToOtherPlayersChanceCard extends ChanceCard {
 
     private int payment;
 
-    public PayToOtherPlayersChanceCard(int id, String name, int payment) {
-        this.id = id;
+    public PayToOtherPlayersChanceCard(int index, String name, int payment) {
+        this.index = index;
         this.name = name;
         this.payment = payment;
     }

@@ -1,8 +1,8 @@
 package domain.component.property;
 
 public class UtilityProperty extends Property {
-    public UtilityProperty(int id, String name, int price) {
-        super(id, name, price);
+    public UtilityProperty(int index, String name, int price) {
+        super(index, name, price);
     }
 
     @Override

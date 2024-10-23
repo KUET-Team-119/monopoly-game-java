@@ -9,21 +9,17 @@ import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import domain.component.Board;
-import domain.component.Cup;
 import domain.component.card.Card;
 import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
 import domain.player.Player;
 
 public class MonopolyGame {
-    private static final int ROUNDS_TOTAL = 20;
+    private final int ROUNDS_TOTAL = 20;
 
-    Scanner scanner;
-    String id;
-    static List<Player> players; // TODO 다른 사람들에게 돈 받는 사회기금 카드 로직 때문에 임시로 public static으로 지정
-    Cup cup;
-    Board board;
+    private Scanner scanner;
+    private String id;
+    private static List<Player> players;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
 
@@ -31,8 +27,7 @@ public class MonopolyGame {
         this.scanner = scanner;
         this.id = id;
         players = new ArrayList<Player>();
-        cup = Cup.getInstance();
-        board = new Board();
+        chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
     }
 
@@ -44,8 +39,6 @@ public class MonopolyGame {
         shuffleDeck(chanceCardDeck);
         shuffleDeck(socialFundCardDeck);
         playGame();
-        // TO-DO 찬스카드, 사회기업카드 shuffle
-        // 카드 모음은 큐로 구현
     }
 
     private void playGame() {
@@ -84,7 +77,7 @@ public class MonopolyGame {
 
     private void generatePlayer(int numOfPlayer) {
         for (int i = 0; i < numOfPlayer; i++) {
-            players.add(new Player(i));
+            players.add(new Player(Integer.toString(i)));
         }
     }
 
@@ -96,7 +89,7 @@ public class MonopolyGame {
 
     private void buildDeck(SocialFundCardType[] values) {
         for (SocialFundCardType type : values) {
-            chanceCardDeck.add(SocialFundCardFactory.createSocialFundCards(type));
+            socialFundCardDeck.add(SocialFundCardFactory.createSocialFundCards(type));
         }
     }
 
@@ -106,5 +99,9 @@ public class MonopolyGame {
 
     public static List<Player> getPlayers() {
         return players;
+    }
+
+    public String getId() {
+        return id;
     }
 }

@@ -1,10 +1,8 @@
 package domain.player;
 
 import domain.square.Square;
-import domain.square.SquareFactory;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Queue;
 
 import domain.component.Piece;
@@ -18,9 +16,9 @@ import domain.square.PropertySquare;
 import domain.square.SquareType;
 
 public class Player {
-    private static final int MAX_COUNT_OF_DOUBLE = 3;
+    private final int MAX_COUNT_OF_DOUBLE = 3;
 
-    private int id;
+    private String id;
     private Piece piece;
     private int cash;
     private int chanceToRoll;
@@ -29,7 +27,7 @@ public class Player {
     private int prisonTerm;
     private PrisonManager prisonManager;
 
-    public Player(int id) {
+    public Player(String id) {
         this.id = id;
         this.piece = new Piece(id, this);
         this.cash = 1_500;
@@ -159,26 +157,12 @@ public class Player {
         return cash;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public Piece getPiece() {
         return piece;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Player player))
-            return false;
-        return Objects.equals(id, player.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
     public void gainProperty(Property property) {
@@ -212,11 +196,11 @@ public class Player {
     }
 
     public void askForMoveForward(SquareType squareType) {
-        piece.moveForward(Board.SQUARES_TOTAL - currentLocationId() + squareType.getIndex());
+        piece.moveForward(Board.SQUARES_TOTAL - getCurrentLocationId() + squareType.getIndex());
     }
 
-    private int currentLocationId() {
-        return piece.locationId();
+    private int getCurrentLocationId() {
+        return piece.getLocationId();
     }
 
     public void askForSetLocation(Square location) {
@@ -228,6 +212,6 @@ public class Player {
     }
 
     public void askForGoBack(int back) {
-        piece.setLocation(Board.squares.get(currentLocationId() - back));
+        piece.setLocation(Board.squares.get(getCurrentLocationId() - back));
     }
 }
