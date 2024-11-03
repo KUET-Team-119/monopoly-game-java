@@ -1,8 +1,6 @@
 package domain.component;
 
 public class Cup {
-    private static Cup instance;
-
     private final int MAX_COUNT_OF_DOUBLE = 3;
     private final int INITIAL_COUNT_OF_DOUBLE = 0;
 
@@ -10,17 +8,10 @@ public class Cup {
     private Die secondDie;
     private int countOfDouble;
 
-    private Cup() {
+    public Cup() {
         this.firstDie = new Die();
         this.secondDie = new Die();
         this.countOfDouble = INITIAL_COUNT_OF_DOUBLE;
-    }
-
-    public static Cup getInstance() {
-        if (instance == null) {
-            instance = new Cup();
-        }
-        return instance;
     }
 
     public int roll() {
@@ -46,7 +37,7 @@ public class Cup {
         return countOfDouble == MAX_COUNT_OF_DOUBLE;
     }
 
-    private void resetCountOfDouble() {
+    public void resetCountOfDouble() {
         countOfDouble = INITIAL_COUNT_OF_DOUBLE;
     }
 }

@@ -19,8 +19,8 @@ public class ReceiveFromOtherPlayersSocialFundCard extends SocialFundCard {
             if (player.equals(otherPlayer)) {
                 continue;
             }
-            otherPlayer.reduceCash(amount);
-            player.addCash(amount);
+            otherPlayer.getCashManager().reduceCash(amount);
+            player.getCashManager().addCash(amount);
         }
     }
 }

@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import domain.component.Board;
 import domain.component.card.Card;
 import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
@@ -19,6 +20,7 @@ public class MonopolyGame {
 
     private Scanner scanner;
     private String id;
+    private Board board;
     private static List<Player> players;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
@@ -26,6 +28,7 @@ public class MonopolyGame {
     public MonopolyGame(Scanner scanner, String id) {
         this.scanner = scanner;
         this.id = id;
+        board = new Board();
         players = new ArrayList<Player>();
         chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
@@ -99,9 +102,5 @@ public class MonopolyGame {
 
     public static List<Player> getPlayers() {
         return players;
-    }
-
-    public String getId() {
-        return id;
     }
 }

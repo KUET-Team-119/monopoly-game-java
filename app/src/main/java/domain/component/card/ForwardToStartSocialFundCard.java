@@ -15,7 +15,7 @@ public class ForwardToStartSocialFundCard extends SocialFundCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.getPiece().setLocation(GO_SQUARE);
+        player.getPieceMovingManager().setLocation(GO_SQUARE);
     }
     
 }

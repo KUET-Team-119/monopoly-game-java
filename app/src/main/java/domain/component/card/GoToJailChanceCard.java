@@ -13,6 +13,6 @@ public class GoToJailChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.askForSetLocation(Board.squares.get(SquareType.JAIL.getIndex()));
+        player.getPieceMovingManager().setLocation(Board.squares.get(SquareType.JAIL.getIndex()));
     }
 }

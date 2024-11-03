@@ -15,7 +15,7 @@ public class GoToJailSocialFundCard extends SocialFundCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.getPiece().setLocation(JAIL_SQUARE);
+        player.getPieceMovingManager().setLocation(JAIL_SQUARE);
     }
     
 }

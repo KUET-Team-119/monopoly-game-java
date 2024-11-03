@@ -6,8 +6,8 @@ import domain.square.SquareType;
 
 public class Piece {
     private String id;
-    private Square location;
     private Player player;
+    private Square location;
 
     public Piece(String id, Player player) {
         this.id = id;
@@ -23,7 +23,7 @@ public class Piece {
 
         if (isPassedGoSquare(destinationId, currentLocationId)) {
             System.out.println("출발칸을 지나갔으니 월급 받으세요.");
-            player.addCash(200);
+            player.getCashManager().addCash(200);
         }
     }
 
@@ -39,7 +39,7 @@ public class Piece {
 
     public void setLocationAndReceiveSalary(Square destination) {
         setLocation(destination);
-        player.addCash(200);
+        player.getCashManager().addCash(200);
     }
 
     private boolean isPassedGoSquare(int currentLocationId, int destinationId) {                

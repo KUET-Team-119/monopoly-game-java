@@ -14,6 +14,6 @@ public class WithdrawChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.reduceCash(amount);
+        player.getCashManager().reduceCash(amount);
     }
 }
