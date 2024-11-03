@@ -1,35 +1,34 @@
 package domain.player.PlayerManager;
 
-import domain.component.Board;
 import domain.component.Piece;
-import domain.square.Square;
+import domain.player.Player;
 import domain.square.SquareType;
 
 public class PieceMovingManager {
     private Piece piece;
 
-    public PieceMovingManager(Piece piece) {
-        this.piece = piece;
+    public PieceMovingManager(String id, Player player) {
+        this.piece = new Piece(id, player);
     }
 
-    public void moveForward(int steps) {
-        piece.moveForward(steps);
+    // 말을 몇 칸 앞으로 이동시키는 행동
+    public void moveForwardBySteps(int steps) {
+        piece.moveForwardBySteps(steps);
     }
 
-    public void setLocation(Square location) {
-        piece.setLocation(location);
+    // 말을 몇 칸 뒤로 이동시키는 행동
+    public void moveBackwardBySteps(int steps) {
+        piece.moveBackwardBySteps(steps);
     }
 
-    public void setLocationAndReceiveSalary(Square location) {
-        piece.setLocationAndReceiveSalary(location);
+    // 말을 특정 칸까지 앞으로 이동시키는 행동
+    public void moveForwardToSquareType(SquareType destination) {
+        piece.moveFowardToSquareType(destination);
     }
 
-    public void moveToSquareType(SquareType squareType) {
-        piece.moveForward(Board.SQUARES_TOTAL - getCurrentLocationId() + squareType.getIndex());
-    }
-
-    public void goBack(int steps) {
-        piece.setLocation(Board.squares.get(getCurrentLocationId() - steps));
+    // 말을 특정 칸으로 순간이동시키는 행동
+    public void warpToSquareType(SquareType destination) {
+        piece.setLocation(destination);
     }
 
     public int getCurrentLocationId() {

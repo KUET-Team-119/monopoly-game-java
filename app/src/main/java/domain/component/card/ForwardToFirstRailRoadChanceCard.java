@@ -12,6 +12,6 @@ public class ForwardToFirstRailRoadChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.getPieceMovingManager().moveToSquareType(SquareType.RAILROAD_GWANGJU);
+        player.getPieceMovingManager().moveForwardToSquareType(SquareType.RAILROAD_GWANGJU);
     }
 }

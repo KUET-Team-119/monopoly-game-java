@@ -1,12 +1,13 @@
 package domain.player.PlayerManager;
 
-import domain.square.PropertySquare;
-
 public class CashManager {
+
+    private final int INITIAL_CASH = 1_500;
+
     private int cash;
 
-    public CashManager(int initialCash) {
-        this.cash = initialCash;
+    public CashManager() {
+        this.cash = INITIAL_CASH;
     }
 
     public void addCash(int amount) {
@@ -21,11 +22,8 @@ public class CashManager {
         return cash >= bailAmount;
     }
 
-    public void attemptPurchase(PropertySquare square, int price) {
-        if (cash >= price) {
-            
-            reduceCash(price);
-        }
+    public boolean canPurchaseProperty(int price) {
+        return cash >= price;
     }
 
     public int getCash() {

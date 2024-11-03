@@ -21,7 +21,7 @@ public abstract class PropertySquare extends Square {
     public void landedOn(Player player) {
         Player owner = property.getOwner();
         int price = property.getPrice();
-        if (owner == null && player.getCashManager().getCash() >= price) {
+        if (owner == null && player.getCashManager().canPurchaseProperty(price)) {
             player.getCashManager().reduceCash(price);
             player.getPropertyManager().addProperty(property);
             setOwner(player);

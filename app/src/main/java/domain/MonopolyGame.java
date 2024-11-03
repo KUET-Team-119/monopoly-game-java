@@ -19,7 +19,9 @@ public class MonopolyGame {
     private final int ROUNDS_TOTAL = 20;
 
     private Scanner scanner;
+    @SuppressWarnings("unused")
     private String id;
+    @SuppressWarnings("unused")
     private Board board;
     private static List<Player> players;
     public static Queue<Card> chanceCardDeck;

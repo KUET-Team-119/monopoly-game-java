@@ -12,6 +12,6 @@ public class ForwardToStartChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.getPieceMovingManager().moveToSquareType(SquareType.START);
+        player.getPieceMovingManager().moveForwardToSquareType(SquareType.START);
     }
 }

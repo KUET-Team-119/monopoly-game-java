@@ -3,10 +3,12 @@ package domain.player.PlayerManager;
 import domain.component.Cup;
 
 public class DiceRollingManager {
+    public final int MAX_COUNT_OF_DOUBLE = 3;
+
     private Cup cup;
 
-    public DiceRollingManager(Cup cup) {
-        this.cup = cup;
+    public DiceRollingManager() {
+        this.cup = Cup.getInstance();
     }
 
     public int rollDice() {
@@ -16,9 +18,5 @@ public class DiceRollingManager {
 
     public boolean isDouble() {
         return cup.isDouble();
-    }
-
-    public boolean isThirdDouble() {
-        return cup.isThirdDouble();
     }
 }

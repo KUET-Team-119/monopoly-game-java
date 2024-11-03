@@ -3,7 +3,6 @@ package domain.player.PlayerState;
 import domain.player.Player;
 
 public class NormalState implements PlayerState {
-    private boolean chanceToRoll;
     private Player player;
 
     public NormalState(Player player) {
@@ -12,35 +11,30 @@ public class NormalState implements PlayerState {
 
     @Override
     public void takeTurn() {
-        retrieveChanceToRoll();
-        while (hasChanceToRoll()) {
-            System.out.println("플레이어 " + player.getId() + "의 차례입니다.");
+        System.out.println("플레이어 " + player.getId() + "의 차례입니다.");
+
+        int maxCountOfDouble = player.getDiceRollingManager().MAX_COUNT_OF_DOUBLE;
+        int countOfDouble = 0;
+
+        while (true) {
             int steps = player.getDiceRollingManager().rollDice();
+            System.out.println("주사위 결과: " + steps);
 
             if (player.getDiceRollingManager().isDouble()) {
-                if (player.getDiceRollingManager().isThirdDouble()) {
-                    System.out.println("더블이 연속 3회 나왔습니다. 감옥으로 갑니다.");
-                    releaseChanceToRoll();
+                countOfDouble++;
+                if (countOfDouble == maxCountOfDouble) {
+                    System.out.println("더블이 연속 " + maxCountOfDouble + "회 나왔습니다. 감옥으로 갑니다.");
                     player.setState(new PrisonState(player));
-                    return;
+                    break;
                 }
-                player.getPieceMovingManager().moveForward(steps);
+                System.out.println("더블입니다. 한 번 더 주사위를 굴릴 수 있습니다.");
             } else {
-                releaseChanceToRoll();
-                player.getPieceMovingManager().moveForward(steps);
+                // 더블이 아닌 경우 반복 종료
+                player.getPieceMovingManager().moveForwardBySteps(steps);
+                break;
             }
+
+            player.getPieceMovingManager().moveForwardBySteps(steps);
         }
-    }
-
-    private void retrieveChanceToRoll() {
-        chanceToRoll = true;
-    }
-
-    private void releaseChanceToRoll() {
-        chanceToRoll = false;
-    }
-
-    private boolean hasChanceToRoll() {
-        return chanceToRoll;
     }
 }

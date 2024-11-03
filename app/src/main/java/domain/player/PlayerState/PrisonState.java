@@ -5,20 +5,17 @@ import domain.player.Player;
 public class PrisonState implements PlayerState {
     public static final int BAIL_AMOUNT = 50; // 보석금
     public static final int INITIAL_PRISON_TERM = 3; // 초기 수감 기간
+    
     private Player player;
-    private int prisonTerm; // 수감 기간 변수 추가
+    private int prisonTerm;
 
     public PrisonState(Player player) {
         this.player = player;
-        this.prisonTerm = INITIAL_PRISON_TERM; // 초기 수감 기간 설정
+        this.prisonTerm = INITIAL_PRISON_TERM;
     }
 
     @Override
     public void takeTurn() {
-        handlePrisonTurn();
-    }
-
-    private void handlePrisonTurn() {
         if (prisonTerm > 0) {
             prisonTerm--; // 수감 기간 감소
             System.out.println("남은 수감 기간: " + prisonTerm);
@@ -56,11 +53,12 @@ public class PrisonState implements PlayerState {
 
     private void leaveJailAndMove(int rollResult) {
         leaveJail();
-        player.getPieceMovingManager().moveForward(rollResult);
+        player.getPieceMovingManager().moveForwardBySteps(rollResult);
     }
 
     private void leaveJail() {
         player.setState(new NormalState(player)); // 정상 상태로 복귀
         System.out.println("감옥에서 나옵니다.");
+        player.takeTurn();
     }
 }

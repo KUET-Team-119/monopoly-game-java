@@ -1,8 +1,6 @@
 package domain.player;
 
 import java.util.Queue;
-import domain.component.Cup;
-import domain.component.Piece;
 import domain.component.card.Card;
 import domain.player.PlayerManager.CashManager;
 import domain.player.PlayerManager.DiceRollingManager;
@@ -22,10 +20,10 @@ public class Player {
     public Player(String id) {
         this.id = id;
         this.state = new NormalState(this);
-        this.cashManager = new CashManager(1_500);
+        this.cashManager = new CashManager();
         this.propertyManager = new PropertyManager();
-        this.diceRollingManager = new DiceRollingManager(new Cup());
-        this.pieceMovingManager = new PieceMovingManager(new Piece(id, this));
+        this.diceRollingManager = new DiceRollingManager();
+        this.pieceMovingManager = new PieceMovingManager(id, this);
     }
 
     public void takeTurn() {

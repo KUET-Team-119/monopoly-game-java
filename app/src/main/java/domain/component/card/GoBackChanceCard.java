@@ -13,6 +13,6 @@ public class GoBackChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.getPieceMovingManager().goBack(STEPS);
+        player.getPieceMovingManager().moveBackwardBySteps(STEPS);
     }
 }
