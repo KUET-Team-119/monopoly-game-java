@@ -1,5 +1,7 @@
 package domain.player.PlayerManager;
 
+// import domain.player.BankruptcyException;
+
 public class CashManager {
 
     private final int INITIAL_CASH = 1_500;
@@ -19,9 +21,11 @@ public class CashManager {
             cash -= amount;
             return amount;
         } else {
-            int payableAmout = cash;
+            // TODO 예외 발생 시 파산한 플레이어에게 한 푼도 못 받는 문제 발생
+            int payableAmount = cash;
             cash = Integer.MIN_VALUE;
-            return payableAmout;
+            // throw new BankruptcyException();
+            return payableAmount;
         }
     }
 

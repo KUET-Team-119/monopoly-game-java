@@ -21,12 +21,8 @@ public class PrisonState implements PlayerState {
             System.out.println("남은 수감 기간: " + prisonTerm);
 
             if (prisonTerm == 0) {
-                if (player.getCashManager().canPayBail(BAIL_AMOUNT)) {
-                    payBailAndExit();
-                } else {
-                    System.out.println("보석금을 낼 수 없어 파산했습니다.");
-                    // TODO: 파산 처리 로직 추가
-                }
+                player.getCashManager().reduceCash(BAIL_AMOUNT);
+                payBailAndExit();
             } else {
                 attemptPrisonEscape();
             }
