@@ -22,7 +22,7 @@ public abstract class Property {
 
     public void setOwner(Player player) {
         owner = player;
-        player.gainProperty(this);
+        player.getPropertyManager().addProperty(this);
     }
 
     public Player getOwner() {

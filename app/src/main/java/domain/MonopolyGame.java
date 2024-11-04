@@ -9,23 +9,30 @@ import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import domain.component.Board;
 import domain.component.card.Card;
 import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
+// import domain.player.BankruptcyException;
 import domain.player.Player;
 
 public class MonopolyGame {
     private final int ROUNDS_TOTAL = 20;
 
     private Scanner scanner;
+    @SuppressWarnings("unused")
     private String id;
+    @SuppressWarnings("unused")
+    private Board board;
     private static List<Player> players;
+    // private List<Player> bankruptPlayers;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
 
     public MonopolyGame(Scanner scanner, String id) {
         this.scanner = scanner;
         this.id = id;
+        board = new Board();
         players = new ArrayList<Player>();
         chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
@@ -60,6 +67,13 @@ public class MonopolyGame {
     private void playRound() {
         for (Player player : players) {
             player.takeTurn();
+            // try {
+            //     player.takeTurn();
+            // } catch (BankruptcyException e) {
+            //     players.remove(Integer.parseInt(player.getId()));
+            //     bankruptPlayers.add(player);
+            //     System.out.println("플레이어 " + player.getId() + "이(가) 파산했습니다.");
+            // }
         }
     }
 
@@ -99,9 +113,5 @@ public class MonopolyGame {
 
     public static List<Player> getPlayers() {
         return players;
-    }
-
-    public String getId() {
-        return id;
     }
 }

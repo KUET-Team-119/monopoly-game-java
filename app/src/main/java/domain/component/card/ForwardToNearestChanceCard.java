@@ -15,34 +15,26 @@ public abstract class ForwardToNearestChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        int currentLocationId = player.getPiece().getLocation().getId();
+        int currentLocationId = player.getPieceMovingManager().getCurrentLocationId();
         Class<? extends Square> targetSquare = getTargetSquareClass();
+        
+        int boardSize = Board.squares.size();
+        int steps = 0; // 이동할 칸 수
 
-        int destinationId = -1;
-
-        for (int i = currentLocationId + 1; i < Board.squares.size(); i++) {
-            Square square = Board.squares.get(i);
+        // 보드 전체를 한 번 순회하며 탐색
+        for (int i = 1; i <= boardSize; i++) {
+            int nextLocationId = (currentLocationId + i) % boardSize;
+            Square square = Board.squares.get(nextLocationId);
+            
             if (targetSquare.isInstance(square)) {
-                destinationId = square.getId();
+                steps = i;
                 break;
             }
         }
 
-        if (destinationId != -1) {
-            player.askForSetLocation(Board.squares.get(destinationId));
-            return;
+        // 찾은 칸 수만큼 이동
+        if (steps > 0) {
+            player.getPieceMovingManager().moveForwardBySteps(steps);
         }
-
-        // 유틸리티 칸이 없다면, 보드 처음부터 탐색
-        for (int i = 0; i <= currentLocationId; i++) {
-            Square square = Board.squares.get(i);
-            if (targetSquare.isInstance(square)) {
-                destinationId = square.getId();
-                break;
-            }
-        }
-
-        player.askForSetLocationAndReceiveSalary(Board.squares.get(destinationId));
     }
-
 }

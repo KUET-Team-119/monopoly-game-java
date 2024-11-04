@@ -14,6 +14,6 @@ public class DepositChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.addCash(amount);
+        player.getCashManager().addCash(amount);
     }
 }

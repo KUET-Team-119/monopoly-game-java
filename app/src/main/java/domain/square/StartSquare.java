@@ -13,7 +13,7 @@ public class StartSquare extends Square{
     @Override
     public void landedOn(Player player) {
         System.out.println("월급 " + SALARY + "원을 받아가세요.");
-        player.addCash(SALARY);
+        player.getCashManager().addCash(SALARY);
     }
     
 }

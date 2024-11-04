@@ -10,6 +10,6 @@ public class RailRoadProperty extends Property {
 
     @Override
     public int getRent() {
-        return RAILROAD_RENT * owner.countRailRoadProperty();
+        return RAILROAD_RENT * owner.getPropertyManager().countRailRoadProperties();
     }
 }

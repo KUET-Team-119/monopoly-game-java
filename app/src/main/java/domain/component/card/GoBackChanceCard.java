@@ -4,7 +4,7 @@ import domain.player.Player;
 
 public class GoBackChanceCard extends ChanceCard {
 
-    private final int BACK = 3;
+    private final int STEPS = 3;
 
     public GoBackChanceCard(int index, String name) {
         this.index = index;
@@ -13,6 +13,6 @@ public class GoBackChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        player.askForGoBack(BACK);
+        player.getPieceMovingManager().moveBackwardBySteps(STEPS);
     }
 }

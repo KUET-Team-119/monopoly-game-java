@@ -14,6 +14,6 @@ public class WithdrawSocialFundCard extends SocialFundCard{
 
     @Override
     public void takeEffect(Player player) {
-        player.reduceCash(amount);
+        player.getCashManager().reduceCash(amount);
     }
 }

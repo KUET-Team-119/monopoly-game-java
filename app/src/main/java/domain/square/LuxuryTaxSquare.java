@@ -13,7 +13,7 @@ public class LuxuryTaxSquare extends Square {
     @Override
     public void landedOn(Player player) {
         System.out.println("사치세 " + TAX + "원을 납부하세요.");
-        player.reduceCash(TAX);
+        player.getCashManager().reduceCash(TAX);
     }
     
 }
