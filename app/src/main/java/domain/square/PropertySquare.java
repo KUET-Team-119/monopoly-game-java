@@ -17,21 +17,4 @@ public abstract class PropertySquare extends Square {
         soldOut = true;
         property.setOwner(player);
     }
-
-    public void landedOn(Player player) {
-        Player owner = property.getOwner();
-        int price = property.getPrice();
-        if (owner == null && player.getCashManager().hasEnoughCash(price)) {
-            player.getCashManager().reduceCash(price);
-            player.getPropertyManager().addProperty(property);
-            setOwner(player);
-            return;
-        }
-        if (owner == player) {
-            return;
-        }
-        int rent = property.getRent();
-        int amount = player.getCashManager().reduceCash(rent);
-        owner.getCashManager().addCash(amount);
-    }
 }
