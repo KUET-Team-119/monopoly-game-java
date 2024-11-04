@@ -21,8 +21,8 @@ public class PayToOtherPlayersChanceCard extends ChanceCard {
         players.remove(player);
 
         for (Player otherPlayer : players) {
-            player.getCashManager().reduceCash(payment);
-            otherPlayer.getCashManager().addCash(payment);
+            int amount = player.getCashManager().reduceCash(payment);
+            otherPlayer.getCashManager().addCash(amount);
         }
     }
 }

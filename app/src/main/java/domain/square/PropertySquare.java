@@ -21,7 +21,7 @@ public abstract class PropertySquare extends Square {
     public void landedOn(Player player) {
         Player owner = property.getOwner();
         int price = property.getPrice();
-        if (owner == null && player.getCashManager().canPurchaseProperty(price)) {
+        if (owner == null && player.getCashManager().hasEnoughCash(price)) {
             player.getCashManager().reduceCash(price);
             player.getPropertyManager().addProperty(property);
             setOwner(player);
@@ -31,7 +31,7 @@ public abstract class PropertySquare extends Square {
             return;
         }
         int rent = property.getRent();
-        owner.getCashManager().addCash(rent);
-        player.getCashManager().reduceCash(rent);
+        int amount = player.getCashManager().reduceCash(rent);
+        owner.getCashManager().addCash(amount);
     }
 }

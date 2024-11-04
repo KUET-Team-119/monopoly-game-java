@@ -49,16 +49,16 @@ public class PrisonState implements PlayerState {
     private void payBailAndExit() {
         player.getCashManager().reduceCash(BAIL_AMOUNT); // 보석금 차감
         leaveJail();
+        player.takeTurn();
     }
 
-    private void leaveJailAndMove(int rollResult) {
+    private void leaveJailAndMove(int steps) {
         leaveJail();
-        player.getPieceMovingManager().moveForwardBySteps(rollResult);
+        player.getPieceMovingManager().moveForwardBySteps(steps);
     }
 
     private void leaveJail() {
         player.setState(new NormalState(player)); // 정상 상태로 복귀
         System.out.println("감옥에서 나옵니다.");
-        player.takeTurn();
     }
 }

@@ -14,16 +14,23 @@ public class CashManager {
         cash += amount;
     }
 
-    public void reduceCash(int amount) {
-        cash -= amount;
+    public int reduceCash(int amount) {
+        if (hasEnoughCash(amount)) {
+            cash -= amount;
+            return amount;
+        } else {
+            int payableAmout = cash;
+            cash = Integer.MIN_VALUE;
+            return payableAmout;
+        }
     }
 
     public boolean canPayBail(int bailAmount) {
         return cash >= bailAmount;
     }
 
-    public boolean canPurchaseProperty(int price) {
-        return cash >= price;
+    public boolean hasEnoughCash(int amount) {
+        return cash >= amount;
     }
 
     public int getCash() {

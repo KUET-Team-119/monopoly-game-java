@@ -5,12 +5,12 @@ import domain.player.Player;
 
 public class ReceiveFromOtherPlayersSocialFundCard extends SocialFundCard {
 
-    private int amount;
+    private int payment;
 
-    public ReceiveFromOtherPlayersSocialFundCard(int index, String name, int amount) {
+    public ReceiveFromOtherPlayersSocialFundCard(int index, String name, int payment) {
         this.index = index;
         this.name = name;
-        this.amount = amount;
+        this.payment = payment;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ReceiveFromOtherPlayersSocialFundCard extends SocialFundCard {
             if (player.equals(otherPlayer)) {
                 continue;
             }
-            otherPlayer.getCashManager().reduceCash(amount);
+            int amount = otherPlayer.getCashManager().reduceCash(payment);
             player.getCashManager().addCash(amount);
         }
     }
