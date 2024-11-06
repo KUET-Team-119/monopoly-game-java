@@ -1,11 +1,6 @@
 package domain.component.property;
 
-import domain.component.Board;
-
 public class LotProperty extends Property {
-
-    private final int MAX_COUNT_OF_HOUSE = 4;
-    private final int MAX_COUNT_OF_HOTEL = 1;
 
     private int defaultRent;
     private int numOfHouse;
@@ -23,14 +18,6 @@ public class LotProperty extends Property {
 
     private int getHotelRent() {
         return numOfHotel * hotelPrice;
-    }
-
-    public boolean canBuildHouse() {
-        return numOfHouse < MAX_COUNT_OF_HOUSE;
-    }
-
-    public boolean canBuildHotel() {
-        return numOfHotel < MAX_COUNT_OF_HOTEL;
     }
 
     @Override
