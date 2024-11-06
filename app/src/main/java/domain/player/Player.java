@@ -5,7 +5,7 @@ import domain.component.card.Card;
 import domain.player.PlayerManager.CashManager;
 import domain.player.PlayerManager.DiceRollingManager;
 import domain.player.PlayerManager.PieceMovingManager;
-import domain.player.PlayerManager.PropertyManager;
+import domain.player.PlayerManager.SqaureManager;
 import domain.player.PlayerState.NormalState;
 import domain.player.PlayerState.PlayerState;
 
@@ -13,7 +13,7 @@ public class Player {
     private String id;
     private PlayerState state;
     private CashManager cashManager;
-    private PropertyManager propertyManager;
+    private SqaureManager squareManager;
     private DiceRollingManager diceRollingManager;
     private PieceMovingManager pieceMovingManager;
 
@@ -21,7 +21,7 @@ public class Player {
         this.id = id;
         this.state = new NormalState(this);
         this.cashManager = new CashManager();
-        this.propertyManager = new PropertyManager();
+        this.squareManager = new SqaureManager();
         this.diceRollingManager = new DiceRollingManager();
         this.pieceMovingManager = new PieceMovingManager(id, this);
     }
@@ -48,8 +48,8 @@ public class Player {
         return cashManager;
     }
 
-    public PropertyManager getPropertyManager() {
-        return propertyManager;
+    public SqaureManager getSquareManager() {
+        return squareManager;
     }
 
     public DiceRollingManager getDiceRollingManager() {

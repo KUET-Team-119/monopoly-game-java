@@ -15,5 +15,5 @@ public abstract class Square {
         return name;
     }
 
-    abstract public void landedOn(Player player);
+    public abstract void landedOn(Player player);
 }

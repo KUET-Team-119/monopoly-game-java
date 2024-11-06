@@ -61,7 +61,7 @@ public class MonopolyGame {
             System.out.println("마지막 라운드를 진행합니다.");
             return;
         }
-        System.out.println("제" + number + "라운드를 진행합니다.");
+        System.out.println("제" + number + " 라운드를 진행합니다.");
     }
 
     private void playRound() {
