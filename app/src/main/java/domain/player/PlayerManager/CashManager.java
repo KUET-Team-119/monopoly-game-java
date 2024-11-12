@@ -29,10 +29,6 @@ public class CashManager {
         }
     }
 
-    public boolean canPayBail(int bailAmount) {
-        return cash >= bailAmount;
-    }
-
     public boolean hasEnoughCash(int amount) {
         return cash >= amount;
     }

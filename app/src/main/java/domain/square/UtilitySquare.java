@@ -1,29 +1,23 @@
 package domain.square;
 
-import domain.component.property.UtilityProperty;
-import domain.player.Player;
-
 public class UtilitySquare extends PropertySquare {
+    
     public UtilitySquare(int index, String name, int price) {
-        super(index, name);
-        property = new UtilityProperty(index, name, price);
+        super(index, name, price);
     }
 
     @Override
-    public void landedOn(Player player) {
-        Player owner = property.getOwner();
-        int price = property.getPrice();
-        if (owner == null && player.getCashManager().hasEnoughCash(price)) {
-            player.getCashManager().reduceCash(price);
-            player.getPropertyManager().addProperty(property);
-            setOwner(player);
-            return;
+    public int getRent() {
+        int count = owner.getSquareManager().countUtilitySquares();
+        int faceValue = owner.getDiceRollingManager().rollDice();
+        if (count == 1) {
+            return faceValue * 4;
         }
-        if (owner == player) {
-            return;
-        }
-        int rent = property.getRent();
-        int amount = player.getCashManager().reduceCash(rent);
-        owner.getCashManager().addCash(amount);
+        return faceValue * 10;
+    }
+
+    @Override
+    public void manageSquare() {
+        System.out.println(name + "을 둘러봅니다.");
     }
 }

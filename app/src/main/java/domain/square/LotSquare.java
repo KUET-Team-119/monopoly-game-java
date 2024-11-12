@@ -1,48 +1,52 @@
 package domain.square;
 
 import domain.component.Board;
-import domain.component.property.LotProperty;
-import domain.player.Player;
+import domain.component.building.Hotel;
+import domain.component.building.House;
 
 public class LotSquare extends PropertySquare {
 
-    private final LotProperty lotProperty;
+    private House house;
+    private Hotel hotel;
 
     public LotSquare(int index, String name, int price) {
-        super(index, name);
-        this.lotProperty = new LotProperty(index, name, price);
-        this.property = lotProperty;
+        super(index, name, price);
+        this.house = new House(price);
+        this.hotel = new Hotel(price);
     }
 
     @Override
-    public void landedOn(Player player) {
-        Player owner = property.getOwner();
-        int price = property.getPrice();
-        if (owner == null && player.getCashManager().hasEnoughCash(price)) {
-            player.getCashManager().reduceCash(price);
-            player.getPropertyManager().addProperty(property);
-            setOwner(player);
-            return;
+    public void manageSquare() {
+        if (canBuildHouse()) {
+            System.out.println("주택을 짓습니다.");
+            house.build();
+            Board.addCountOfHouse();
+            owner.getCashManager().reduceCash((house.getPrice()));
+        } else if (canBuildHotel()) {
+            System.out.println("호텔을 짓습니다.");
+            hotel.build();
+            Board.addCountOfHotel();
+            owner.getCashManager().reduceCash((hotel.getPrice()));
+        } else {
+            System.out.println("건물을 지을 수 없습니다.");
         }
-        if (owner == player) {
-            // 보드 판 위에 있는 건물 수 (남아있는 건물 수 확인)
-            if (Board.canBuildHouse() && lotProperty.canBuildHouse()) {
-                // 주택 짓기
-            } else if (Board.canBuildHouse() && !lotProperty.canBuildHouse()) {
-                // 호텔 가능 여부 계산
-                if (Board.canBuildHotel() && lotProperty.canBuildHotel()) {
+    }
 
-                }
-            }
-            // 지어져 있는 건물(주택, 호텔 수) -> 주택 확인을 하고, 주택이 4개이면 못하고
-            // 내 돈 확인 (건설 비용보다 크거나 같아야)
-            // 건물을 추가 -> LotProperty에 해당 건물 수를 늘린다
-            // Board에서 관리하는 건물 수 하나 더해야 함
-            // 사용자 건설비용만큼 cash 줄이기
-            return;
-        }
-        int rent = property.getRent();
-        int amount = player.getCashManager().reduceCash(rent);
-        owner.getCashManager().addCash(amount);
+    private boolean canBuildHouse() {
+        return Board.canBuildHouse() &&
+               house.canBuild() &&
+               owner.getCashManager().hasEnoughCash(house.getPrice());
+    }
+
+    private boolean canBuildHotel() {
+        return Board.canBuildHotel() &&
+               !house.canBuild() &&
+               hotel.canBuild() &&
+               owner.getCashManager().hasEnoughCash(hotel.getPrice());
+    }
+    
+    @Override
+    public int getRent() {
+        return price + house.getRent() + hotel.getRent();
     }
 }

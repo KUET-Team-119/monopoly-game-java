@@ -9,8 +9,8 @@ import domain.square.SquareType;
 
 public class Board {
     public static final int SQUARES_TOTAL = 40;
-    public static final int MAX_COUNT_OF_HOUSE = 32;
-    public static final int MAX_COUNT_OF_HOTEL = 12;
+    public static final int MAX_COUNT_OF_HOUSE_ON_BOARD = 32;
+    public static final int MAX_COUNT_OF_HOTEL_ON_BOARD = 12;
     public static Map<Integer, Square> squares;
 
     public static int currentCountOfHouse;
@@ -24,11 +24,11 @@ public class Board {
     }
 
     public static boolean canBuildHouse() {
-        return currentCountOfHouse < MAX_COUNT_OF_HOUSE;
+        return currentCountOfHouse < MAX_COUNT_OF_HOUSE_ON_BOARD;
     }
 
     public static boolean canBuildHotel() {
-        return currentCountOfHotel < MAX_COUNT_OF_HOTEL;
+        return currentCountOfHotel < MAX_COUNT_OF_HOTEL_ON_BOARD;
     }
 
     public static void addCountOfHouse() {
