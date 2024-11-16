@@ -14,8 +14,10 @@ import domain.component.card.Card;
 import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
 import domain.player.Player;
+import java.util.Iterator;
 
 public class MonopolyGame {
+
     private final int ROUNDS_TOTAL = 20;
 
     private Scanner scanner;
@@ -27,6 +29,7 @@ public class MonopolyGame {
     private static Map<String, Player> bankruptPlayers;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
+    public static Iterator<Player> iterator;
 
     public MonopolyGame(Scanner scanner, String id) {
         this.scanner = scanner;
@@ -36,6 +39,7 @@ public class MonopolyGame {
         bankruptPlayers = new HashMap<>();
         chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
+        iterator = null;
     }
 
     public void initialize() {
@@ -65,7 +69,9 @@ public class MonopolyGame {
     }
 
     private void playRound() {
-        for (Player player : players.values()) {
+        iterator = players.values().iterator();
+        while (iterator.hasNext()) {
+            Player player = iterator.next();
             player.takeTurn();
         }
     }
@@ -113,5 +119,6 @@ public class MonopolyGame {
         String playerId = player.getId();
         players.remove(playerId); // id로 플레이어 제거
         bankruptPlayers.put(playerId, player); // 파산한 플레이어를 bankruptPlayers에 추가
+        iterator.remove();
     }
 }

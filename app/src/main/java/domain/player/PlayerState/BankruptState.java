@@ -3,10 +3,10 @@ package domain.player.PlayerState;
 import domain.MonopolyGame;
 import domain.player.Player;
 
-public class BankruptSate implements PlayerState{
+public class BankruptState implements PlayerState{
     private Player player;
 
-    public BankruptSate(Player player) {
+    public BankruptState(Player player) {
         this.player = player;
     }
     

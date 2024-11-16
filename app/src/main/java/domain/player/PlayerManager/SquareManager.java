@@ -9,10 +9,10 @@ import domain.square.UtilitySquare;
 import domain.square.LotSquare;
 import domain.square.PropertySquare;
 
-public class SqaureManager {
+public class SquareManager {
     private Map<Integer, PropertySquare> propertySquares;
 
-    public SqaureManager() {
+    public SquareManager() {
         this.propertySquares = new HashMap<Integer, PropertySquare>();
     }
 

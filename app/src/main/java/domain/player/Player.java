@@ -1,27 +1,27 @@
 package domain.player;
 
-import java.util.Queue;
 import domain.component.card.Card;
 import domain.player.PlayerManager.CashManager;
 import domain.player.PlayerManager.DiceRollingManager;
 import domain.player.PlayerManager.PieceMovingManager;
-import domain.player.PlayerManager.SqaureManager;
+import domain.player.PlayerManager.SquareManager;
 import domain.player.PlayerState.NormalState;
 import domain.player.PlayerState.PlayerState;
+import java.util.Queue;
 
 public class Player {
-    private String id;
+    private final String id;
     private PlayerState state;
-    private CashManager cashManager;
-    private SqaureManager squareManager;
-    private DiceRollingManager diceRollingManager;
-    private PieceMovingManager pieceMovingManager;
+    private final CashManager cashManager;
+    private final SquareManager squareManager;
+    private final DiceRollingManager diceRollingManager;
+    private final PieceMovingManager pieceMovingManager;
 
-    public Player(String id) {
+    public Player(final String id) {
         this.id = id;
         this.state = new NormalState(this);
         this.cashManager = new CashManager(this);
-        this.squareManager = new SqaureManager();
+        this.squareManager = new SquareManager();
         this.diceRollingManager = new DiceRollingManager();
         this.pieceMovingManager = new PieceMovingManager(id, this);
     }
@@ -40,6 +40,10 @@ public class Player {
         deck.add(card);
     }
 
+    public boolean isNormalState() {
+        return this.state instanceof NormalState;
+    }
+
     public String getId() {
         return id;
     }
@@ -52,7 +56,7 @@ public class Player {
         return cashManager;
     }
 
-    public SqaureManager getSquareManager() {
+    public SquareManager getSquareManager() {
         return squareManager;
     }
 

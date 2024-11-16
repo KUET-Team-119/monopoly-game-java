@@ -1,5 +1,5 @@
-// package domain.player;
+ package domain.player;
 
-// public class BankruptcyException extends RuntimeException {
-//     public BankruptcyException() { }
-// }
+ public class BankruptcyException extends RuntimeException {
+     public BankruptcyException() { }
+ }

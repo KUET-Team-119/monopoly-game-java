@@ -3,13 +3,13 @@ package domain.player.PlayerManager;
 import java.util.List;
 
 import domain.player.Player;
-import domain.player.PlayerState.BankruptSate;
+import domain.player.PlayerState.BankruptState;
 import domain.square.LotSquare;
 import domain.square.PropertySquare;
 
 public class CashManager {
 
-    private final int INITIAL_CASH = 1_500;
+    private static final int INITIAL_CASH = 1_500;
 
     private Player player;
     private int cash;
@@ -31,12 +31,10 @@ public class CashManager {
         }
         return handleInsufficientCash(amount);
     }
-
     private int reduceAvailableCash(int amount) {
         cash -= amount;
         return amount;
     }
-
     private int handleInsufficientCash(int amount) {
         coverCash(amount);
 
@@ -47,17 +45,13 @@ public class CashManager {
     }
 
     private int handleBankruptcy() {
-        player.setState(new BankruptSate(player));
+        player.setState(new BankruptState(player));
         int payableAmount = cash;
         cash = 0;
         player.takeTurn(); // 돈을 지불한 플레이어가 잠시 추가 턴을 받아서 파산 처리
         return payableAmount;
     }
-
-    public boolean hasEnoughCash(int amount) {
-        return cash >= amount;
-    }
-
+    
     private void coverCash(int amount) {
         List<PropertySquare> sortedPropertySquares = player.getSquareManager().getSortedPropertySquare();
         int totalCash = cash;
@@ -77,6 +71,10 @@ public class CashManager {
     
         // 모든 부지를 팔고도 부족하다면, 남은 현금 설정
         cash = totalCash;
+    }
+
+    public boolean hasEnoughCash(int amount) {
+        return cash >= amount;
     }
     
     public int getCash() {

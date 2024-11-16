@@ -6,10 +6,10 @@ public class PrisonState implements PlayerState {
     public static final int BAIL_AMOUNT = 50; // 보석금
     public static final int INITIAL_PRISON_TERM = 3; // 초기 수감 기간
     
-    private Player player;
+    private final Player player;
     private int prisonTerm;
 
-    public PrisonState(Player player) {
+    public PrisonState(final Player player) {
         this.player = player;
         this.prisonTerm = INITIAL_PRISON_TERM;
     }
@@ -17,7 +17,7 @@ public class PrisonState implements PlayerState {
     @Override
     public void takeTurn() {
         if (prisonTerm > 0) {
-            prisonTerm--; // 수감 기간 감소
+            prisonTerm--;
             System.out.println("남은 수감 기간: " + prisonTerm);
 
             if (prisonTerm == 0) {

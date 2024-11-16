@@ -1,7 +1,7 @@
 package domain.component.building;
 
 public class Hotel extends Building {
-    private final int MAX_COUNT_OF_HOTEL = 1;
+    private static final int MAX_COUNT_OF_HOTEL = 1;
 
     public Hotel(int price) {
         super((int) Math.round(price * 0.4));

@@ -1,11 +1,10 @@
 package domain.component;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import domain.square.Square;
 import domain.square.SquareFactory;
 import domain.square.SquareType;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Board {
     public static final int SQUARES_TOTAL = 40;

@@ -51,5 +51,12 @@ public abstract class PropertySquare extends Square {
 
     public abstract void manageSquare();
 
+    public PropertySquare isMoreExpensive(PropertySquare square) {
+        if (this.getRent() > square.getRent()) {
+            return this;
+        }
+        return square;
+    }
+
     public abstract int getRent();
 }

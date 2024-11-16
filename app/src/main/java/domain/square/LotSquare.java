@@ -6,10 +6,10 @@ import domain.component.building.House;
 
 public class LotSquare extends PropertySquare {
 
-    private House house;
-    private Hotel hotel;
+    private final House house;
+    private final Hotel hotel;
 
-    public LotSquare(int index, String name, int price) {
+    public LotSquare(final int index, final String name, final int price) {
         super(index, name, price);
         this.house = new House(price);
         this.hotel = new Hotel(price);
@@ -53,5 +53,9 @@ public class LotSquare extends PropertySquare {
     @Override
     public int getRent() {
         return price + house.getRent() + hotel.getRent();
+    }
+
+    public int sellToBank() {
+        return house.sold() + hotel.sold();
     }
 }
