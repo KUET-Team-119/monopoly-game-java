@@ -27,7 +27,7 @@ public abstract class PropertySquare extends Square {
                 System.out.println("땅을 구매합니다.");
                 player.getCashManager().reduceCash(price);
                 setOwner(player);
-                player.getSquareManager().addSquare(this);
+                player.getSquareManager().addPropertySquare(this.index, this);
             } else {
                 System.out.println("돈이 부족해 땅을 구입할 수 없습니다.");
             }
@@ -44,6 +44,10 @@ public abstract class PropertySquare extends Square {
         System.out.println(amount + "원을 플레이어 " + owner.getId() + "에게 줍니다.");
         owner.getCashManager().addCash(amount);
     }
+
+    public int getPrice() {
+        return price;
+    } 
 
     public abstract void manageSquare();
 

@@ -2,18 +2,17 @@ package domain;
 
 import domain.component.card.ChanceCardFactory;
 import domain.component.card.ChanceCardType;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import domain.component.Board;
 import domain.component.card.Card;
 import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
-// import domain.player.BankruptcyException;
 import domain.player.Player;
 
 public class MonopolyGame {
@@ -24,8 +23,8 @@ public class MonopolyGame {
     private String id;
     @SuppressWarnings("unused")
     private Board board;
-    private static List<Player> players;
-    // private List<Player> bankruptPlayers;
+    private static Map<String, Player> players;
+    private static Map<String, Player> bankruptPlayers;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
 
@@ -33,7 +32,8 @@ public class MonopolyGame {
         this.scanner = scanner;
         this.id = id;
         board = new Board();
-        players = new ArrayList<Player>();
+        players = new HashMap<>();
+        bankruptPlayers = new HashMap<>();
         chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
     }
@@ -65,15 +65,8 @@ public class MonopolyGame {
     }
 
     private void playRound() {
-        for (Player player : players) {
+        for (Player player : players.values()) {
             player.takeTurn();
-            // try {
-            //     player.takeTurn();
-            // } catch (BankruptcyException e) {
-            //     players.remove(Integer.parseInt(player.getId()));
-            //     bankruptPlayers.add(player);
-            //     System.out.println("플레이어 " + player.getId() + "이(가) 파산했습니다.");
-            // }
         }
     }
 
@@ -91,7 +84,8 @@ public class MonopolyGame {
 
     private void generatePlayer(int numOfPlayer) {
         for (int i = 0; i < numOfPlayer; i++) {
-            players.add(new Player(Integer.toString(i)));
+            String playerId = Integer.toString(i);
+            players.put(playerId, new Player(playerId));
         }
     }
 
@@ -111,7 +105,13 @@ public class MonopolyGame {
         Collections.shuffle((LinkedList<Card>) card);
     }
 
-    public static List<Player> getPlayers() {
+    public static Map<String, Player> getPlayers() {
         return players;
+    }
+
+    public static void handleBankruptPlayer(Player player) {
+        String playerId = player.getId();
+        players.remove(playerId); // id로 플레이어 제거
+        bankruptPlayers.put(playerId, player); // 파산한 플레이어를 bankruptPlayers에 추가
     }
 }

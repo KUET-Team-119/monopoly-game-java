@@ -20,7 +20,7 @@ public class Player {
     public Player(String id) {
         this.id = id;
         this.state = new NormalState(this);
-        this.cashManager = new CashManager();
+        this.cashManager = new CashManager(this);
         this.squareManager = new SqaureManager();
         this.diceRollingManager = new DiceRollingManager();
         this.pieceMovingManager = new PieceMovingManager(id, this);
@@ -42,6 +42,10 @@ public class Player {
 
     public String getId() {
         return id;
+    }
+
+    public PlayerState getState() {
+        return state;
     }
 
     public CashManager getCashManager() {

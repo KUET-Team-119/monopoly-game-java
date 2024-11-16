@@ -34,7 +34,7 @@ public class PrisonState implements PlayerState {
         int rollResult = player.getDiceRollingManager().rollDice();
 
         if (player.getDiceRollingManager().isDouble()) {
-            System.out.println("더블이 나왔습니다. 감옥에서 나갑니다!");
+            System.out.println("더블이 나왔습니다. 탈옥에 성공했습니다!");
             leaveJailAndMove(rollResult);
         } else {
             System.out.println("더블이 나오지 않았습니다.");
@@ -43,9 +43,11 @@ public class PrisonState implements PlayerState {
     }
 
     private void payBailAndExit() {
-        player.getCashManager().reduceCash(BAIL_AMOUNT); // 보석금 차감
-        leaveJail();
-        player.takeTurn();
+        int paidCash = player.getCashManager().reduceCash(BAIL_AMOUNT);
+        if (paidCash == BAIL_AMOUNT) {
+            leaveJail();
+            player.takeTurn(); // 정상 상태에서 턴 실행
+        }
     }
 
     private void leaveJailAndMove(int steps) {

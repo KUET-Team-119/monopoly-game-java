@@ -70,6 +70,6 @@ public class Piece {
     }
 
     public int getLocationId() {
-        return location.getId();
+        return location.getIndex();
     }
 }

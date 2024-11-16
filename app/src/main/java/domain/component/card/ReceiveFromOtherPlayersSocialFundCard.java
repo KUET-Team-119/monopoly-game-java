@@ -15,7 +15,7 @@ public class ReceiveFromOtherPlayersSocialFundCard extends SocialFundCard {
 
     @Override
     public void takeEffect(Player player) {
-        for (Player otherPlayer : MonopolyGame.getPlayers()) {
+        for (Player otherPlayer : MonopolyGame.getPlayers().values()) {
             if (player.equals(otherPlayer)) {
                 continue;
             }

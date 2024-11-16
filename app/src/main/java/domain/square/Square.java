@@ -7,7 +7,7 @@ public abstract class Square {
     protected int index;
     protected String name;
 
-    public int getId() {
+    public int getIndex() {
         return index;
     }
 

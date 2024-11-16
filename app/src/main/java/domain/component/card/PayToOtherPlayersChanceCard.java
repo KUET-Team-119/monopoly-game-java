@@ -3,8 +3,6 @@ package domain.component.card;
 import domain.MonopolyGame;
 import domain.player.Player;
 
-import java.util.List;
-
 public class PayToOtherPlayersChanceCard extends ChanceCard {
 
     private int payment;
@@ -17,10 +15,10 @@ public class PayToOtherPlayersChanceCard extends ChanceCard {
 
     @Override
     public void takeEffect(Player player) {
-        List<Player> players = MonopolyGame.getPlayers();
-        players.remove(player);
-
-        for (Player otherPlayer : players) {
+        for (Player otherPlayer : MonopolyGame.getPlayers().values()) {
+            if (player.equals(otherPlayer)) {
+                continue;
+            }
             int amount = player.getCashManager().reduceCash(payment);
             otherPlayer.getCashManager().addCash(amount);
         }

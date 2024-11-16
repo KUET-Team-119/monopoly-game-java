@@ -16,6 +16,10 @@ public abstract class Building {
         count++;
     }
 
+    public void destroy() {
+        count = 0;
+    }
+
     public int getRent() {
         return count * price;
     }

@@ -44,7 +44,12 @@ public class LotSquare extends PropertySquare {
                hotel.canBuild() &&
                owner.getCashManager().hasEnoughCash(hotel.getPrice());
     }
-    
+
+    public void destroyBuilding() {
+        house.destroy();
+        hotel.destroy();
+    }
+
     @Override
     public int getRent() {
         return price + house.getRent() + hotel.getRent();
