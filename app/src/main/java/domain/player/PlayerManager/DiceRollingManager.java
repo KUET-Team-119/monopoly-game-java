@@ -8,7 +8,7 @@ public class DiceRollingManager {
     private Cup cup;
 
     public DiceRollingManager() {
-        this.cup = Cup.getInstance();
+        this.cup = Cup.INSTANCE;
     }
 
     public int rollDice() {
