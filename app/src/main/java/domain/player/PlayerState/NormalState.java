@@ -15,11 +15,12 @@ public class NormalState implements PlayerState {
 
         int countOfDouble = 0;
 
-        while (player.isNormalState()) {
+        while (player.getStateManager().isNormalState()) {
             int steps = player.getDiceRollingManager().rollDice();
             System.out.println("주사위 결과: " + steps);
 
             if (player.getDiceRollingManager().isDouble()) {
+                System.out.println("더블이 나왔습니다.");
                 if (++countOfDouble == player.getDiceRollingManager().MAX_COUNT_OF_DOUBLE) {
                     sendToPrison();
                     break;
@@ -35,7 +36,7 @@ public class NormalState implements PlayerState {
 
     private void sendToPrison() {
         System.out.println("더블이 연속 " + player.getDiceRollingManager().MAX_COUNT_OF_DOUBLE + "회 나왔습니다. 감옥으로 갑니다.");
-        player.setState(new PrisonState(player));
+        player.getStateManager().becomePrisonState();
     }
 
     private void movePlayer(int steps) {

@@ -3,6 +3,7 @@ package domain;
 import domain.component.card.ChanceCardFactory;
 import domain.component.card.ChanceCardType;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Collections;
@@ -14,7 +15,6 @@ import domain.component.card.Card;
 import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
 import domain.player.Player;
-import java.util.Iterator;
 
 public class MonopolyGame {
 
@@ -29,7 +29,6 @@ public class MonopolyGame {
     private static Map<String, Player> bankruptPlayers;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
-    public static Iterator<Player> iterator;
 
     public MonopolyGame(Scanner scanner, String id) {
         this.scanner = scanner;
@@ -39,7 +38,6 @@ public class MonopolyGame {
         bankruptPlayers = new HashMap<>();
         chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
-        iterator = null;
     }
 
     public void initialize() {
@@ -56,8 +54,14 @@ public class MonopolyGame {
         System.out.println("게임 시작!");
         for (int i = 1; i <= ROUNDS_TOTAL; i++) {
             printRoundNumber(i);
-            playRound();
+            try {
+                playRound();
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+                break;
+            }
         }
+        finishGame();
     }
 
     private void printRoundNumber(int number) {
@@ -65,14 +69,16 @@ public class MonopolyGame {
             System.out.println("마지막 라운드를 진행합니다.");
             return;
         }
-        System.out.println("제" + number + " 라운드를 진행합니다.");
+        System.out.println("제" + number + "라운드를 진행합니다.");
     }
 
     private void playRound() {
-        iterator = players.values().iterator();
-        while (iterator.hasNext()) {
-            Player player = iterator.next();
+        for (Player player : players.values()) {
+            if (player.getStateManager().isBankruptState()) {
+                continue;
+            }
             player.takeTurn();
+            checkRemainingPlayers();
         }
     }
 
@@ -117,8 +123,43 @@ public class MonopolyGame {
 
     public static void handleBankruptPlayer(Player player) {
         String playerId = player.getId();
-        players.remove(playerId); // id로 플레이어 제거
         bankruptPlayers.put(playerId, player); // 파산한 플레이어를 bankruptPlayers에 추가
-        iterator.remove();
     }
+
+    private void checkRemainingPlayers() {
+        if (bankruptPlayers.size() == players.size() - 1) {
+            throw new RuntimeException("플레이어가 한 명 남았습니다.");
+        }
+    }
+
+    private void finishGame() {
+        System.out.println("게임이 종료되었습니다.");
+        rankPlayers();
+    }
+
+    private void rankPlayers() {
+        rankSurvivingPlayersByAssets();
+        rankBankruptPlayersBySurvivalTime();
+    }
+
+    private void rankSurvivingPlayersByAssets() {
+        PriorityQueue<Player> rankedSurvivingPlayers = new PriorityQueue<>(
+            (p1, p2) -> Integer.compare(p2.getCashManager().calculateTotalAssets(),
+                                        p1.getCashManager().calculateTotalAssets()));
+                                        
+        players.values().stream()
+            .filter(p -> !p.getStateManager().isBankruptState())
+            .forEach(rankedSurvivingPlayers::offer);
+        
+        int rank = 1;
+        while (!rankedSurvivingPlayers.isEmpty()) {
+            Player player = rankedSurvivingPlayers.poll();
+            System.out.println(rank++ + "등: " + player.getId() + " (총자산: " + player.getCashManager().getCash() + ")");
+        }
+    }
+
+    private void rankBankruptPlayersBySurvivalTime() {
+        
+    }
+
 }
