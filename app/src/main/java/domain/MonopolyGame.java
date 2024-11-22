@@ -26,7 +26,7 @@ public class MonopolyGame {
     @SuppressWarnings("unused")
     private Board board;
     private static Map<String, Player> players;
-    private static Map<String, Player> bankruptPlayers;
+    private static Queue<Player> bankruptPlayers;
     public static Queue<Card> chanceCardDeck;
     public static Queue<Card> socialFundCardDeck;
 
@@ -34,8 +34,8 @@ public class MonopolyGame {
         this.scanner = scanner;
         this.id = id;
         board = new Board();
-        players = new HashMap<>();
-        bankruptPlayers = new HashMap<>();
+        players = new HashMap<String, Player>();
+        bankruptPlayers = new LinkedList<Player>();
         chanceCardDeck = new LinkedList<Card>();
         socialFundCardDeck = new LinkedList<Card>();
     }
@@ -122,8 +122,7 @@ public class MonopolyGame {
     }
 
     public static void handleBankruptPlayer(Player player) {
-        String playerId = player.getId();
-        bankruptPlayers.put(playerId, player); // 파산한 플레이어를 bankruptPlayers에 추가
+        bankruptPlayers.add(player); // 파산한 플레이어를 bankruptPlayers에 추가
     }
 
     private void checkRemainingPlayers() {
@@ -138,11 +137,12 @@ public class MonopolyGame {
     }
 
     private void rankPlayers() {
-        rankSurvivingPlayersByAssets();
-        rankBankruptPlayersBySurvivalTime();
+        int rank = 1;
+        rank = rankSurvivingPlayersByAssets(rank);
+        rankBankruptPlayersBySurvivalTime(rank);
     }
 
-    private void rankSurvivingPlayersByAssets() {
+    private int rankSurvivingPlayersByAssets(int rank) {
         PriorityQueue<Player> rankedSurvivingPlayers = new PriorityQueue<>(
             (p1, p2) -> Integer.compare(p2.getCashManager().calculateTotalAssets(),
                                         p1.getCashManager().calculateTotalAssets()));
@@ -151,15 +151,18 @@ public class MonopolyGame {
             .filter(p -> !p.getStateManager().isBankruptState())
             .forEach(rankedSurvivingPlayers::offer);
         
-        int rank = 1;
         while (!rankedSurvivingPlayers.isEmpty()) {
             Player player = rankedSurvivingPlayers.poll();
-            System.out.println(rank++ + "등: " + player.getId() + " (총자산: " + player.getCashManager().getCash() + ")");
+            System.out.println(rank++ + "등: 플레이어 " + player.getId() + " (총자산: " + player.getCashManager().getCash() + ")");
+        }
+
+        return rank;
+    }
+
+    private void rankBankruptPlayersBySurvivalTime(int rank) {
+        while (!bankruptPlayers.isEmpty()) {
+            Player bankruptPlayer = bankruptPlayers.remove();
+            System.out.println(rank++ + "등: 플레이어 " + bankruptPlayer.getId());
         }
     }
-
-    private void rankBankruptPlayersBySurvivalTime() {
-        
-    }
-
 }
