@@ -6,10 +6,10 @@ public class PrisonState implements PlayerState {
     public static final int BAIL_AMOUNT = 50; // 보석금
     public static final int INITIAL_PRISON_TERM = 3; // 초기 수감 기간
     
-    private final Player player;
+    private Player player;
     private int prisonTerm;
 
-    public PrisonState(final Player player) {
+    public PrisonState(Player player) {
         this.player = player;
         this.prisonTerm = INITIAL_PRISON_TERM;
     }
@@ -56,7 +56,7 @@ public class PrisonState implements PlayerState {
     }
 
     private void leaveJail() {
-        player.setState(new NormalState(player)); // 정상 상태로 복귀
+        player.getStateManager().becomeNormalState(); // 정상 상태로 복귀
         System.out.println("감옥에서 나옵니다.");
     }
 }

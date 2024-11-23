@@ -5,13 +5,12 @@ import domain.player.PlayerManager.CashManager;
 import domain.player.PlayerManager.DiceRollingManager;
 import domain.player.PlayerManager.PieceMovingManager;
 import domain.player.PlayerManager.SquareManager;
-import domain.player.PlayerState.NormalState;
-import domain.player.PlayerState.PlayerState;
+import domain.player.PlayerManager.StateManager;
 import java.util.Queue;
 
 public class Player {
     private final String id;
-    private PlayerState state;
+    private final StateManager stateManager;
     private final CashManager cashManager;
     private final SquareManager squareManager;
     private final DiceRollingManager diceRollingManager;
@@ -19,7 +18,7 @@ public class Player {
 
     public Player(final String id) {
         this.id = id;
-        this.state = new NormalState(this);
+        this.stateManager = new StateManager(this);
         this.cashManager = new CashManager(this);
         this.squareManager = new SquareManager();
         this.diceRollingManager = new DiceRollingManager();
@@ -27,11 +26,7 @@ public class Player {
     }
 
     public void takeTurn() {
-        state.takeTurn();
-    }
-
-    public void setState(PlayerState state) {
-        this.state = state;
+        stateManager.getState().takeTurn();
     }
 
     public void drawCard(Queue<Card> deck) {
@@ -40,16 +35,12 @@ public class Player {
         deck.add(card);
     }
 
-    public boolean isNormalState() {
-        return this.state instanceof NormalState;
-    }
-
     public String getId() {
         return id;
     }
 
-    public PlayerState getState() {
-        return state;
+    public StateManager getStateManager() {
+        return stateManager;
     }
 
     public CashManager getCashManager() {

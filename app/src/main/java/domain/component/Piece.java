@@ -21,12 +21,11 @@ public class Piece {
         System.out.println("앞으로 " + steps + "칸 이동합니다.");
         int currentLocationId = getLocationId();
         int destinationId = (currentLocationId + steps) % Board.SQUARES_TOTAL;
-        setLocation(Board.squares.get(destinationId));
-
         if (isPassedGoSquare(destinationId, currentLocationId)) {
             System.out.println("출발칸을 지나갔으니 월급 받으세요.");
             player.getCashManager().addCash(200);
         }
+        setLocation(Board.squares.get(destinationId));
     }
 
     // 몇 칸 뒤로 이동하는 행동

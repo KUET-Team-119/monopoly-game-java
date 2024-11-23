@@ -64,11 +64,7 @@ public class SquareManager {
     // 부지의 가치를 기준으로 propertySquares 정렬
     public List<PropertySquare> getSortedPropertySquare() {
         List<PropertySquare> sortedPropertySquares = propertySquares.values().stream()
-                .sorted((p1, p2) -> {
-                    int value1 = p1.getRent();
-                    int value2 = p2.getRent();
-                    return Integer.compare(value2, value1);  // 내림차순으로 정렬
-                })
+                .sorted((p1, p2) -> Integer.compare(p2.getRent(), p1.getRent()))
                 .toList();
         return sortedPropertySquares;
     }

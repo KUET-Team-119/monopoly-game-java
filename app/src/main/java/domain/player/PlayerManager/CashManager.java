@@ -3,7 +3,6 @@ package domain.player.PlayerManager;
 import java.util.List;
 
 import domain.player.Player;
-import domain.player.PlayerState.BankruptState;
 import domain.square.LotSquare;
 import domain.square.PropertySquare;
 
@@ -15,8 +14,8 @@ public class CashManager {
     private int cash;
 
     public CashManager(Player player) {
-        this.cash = INITIAL_CASH;
         this.player = player;
+        this.cash = INITIAL_CASH;
     }
 
     public void addCash(int amount) {
@@ -25,16 +24,18 @@ public class CashManager {
     }
 
     public int reduceCash(int amount) {
-        System.out.println("가진 돈은" + cash + "원입니다.");
+        System.out.println("가진 돈은 " + cash + "원입니다.");
         if (hasEnoughCash(amount)) {
             return reduceAvailableCash(amount);
         }
         return handleInsufficientCash(amount);
     }
+
     private int reduceAvailableCash(int amount) {
         cash -= amount;
         return amount;
     }
+
     private int handleInsufficientCash(int amount) {
         coverCash(amount);
 
@@ -45,10 +46,10 @@ public class CashManager {
     }
 
     private int handleBankruptcy() {
-        player.setState(new BankruptState(player));
+        System.out.println("플레이어 " + player.getId() + "이/가 파산했습니다.");
+        player.getStateManager().becomeBankruptState();
         int payableAmount = cash;
         cash = 0;
-        player.takeTurn(); // 돈을 지불한 플레이어가 잠시 추가 턴을 받아서 파산 처리
         return payableAmount;
     }
     
@@ -75,6 +76,11 @@ public class CashManager {
 
     public boolean hasEnoughCash(int amount) {
         return cash >= amount;
+    }
+
+    public int calculateTotalAssets() {
+        coverCash(Integer.MAX_VALUE);
+        return getCash();
     }
     
     public int getCash() {
