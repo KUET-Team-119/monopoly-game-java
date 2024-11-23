@@ -73,8 +73,8 @@ public class MonopolyGame {
     private void finalizeGame() {
         List<Player> survivedPlayersRank = determineSurvivedPlayersRank();
         List<Player> bankruptedPlayersRank = determineBankruptedPlayersRank();
-        List<Player> combinedRank = combinePlayerRank(survivedPlayersRank, bankruptedPlayersRank);
-        announceWinner(combinedRank);
+
+        announceWinner(combinePlayerRank(survivedPlayersRank, bankruptedPlayersRank));
     }
 
     private List<Player> determineBankruptedPlayersRank() {
@@ -90,7 +90,10 @@ public class MonopolyGame {
         return players.values()
                 .stream()
                 .peek(player -> player.getCashManager().reduceCash(Integer.MAX_VALUE))
-                .sorted(Comparator.comparingInt(p -> p.getCashManager().getCash()))
+                .sorted(Comparator.comparingInt(
+                        (Player player) -> player.getCashManager().getCash())
+                        .reversed()
+                )
                 .toList();
     }
 
