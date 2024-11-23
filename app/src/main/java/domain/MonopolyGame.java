@@ -6,9 +6,15 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import domain.component.Board;
 import domain.component.card.Card;
@@ -137,12 +143,15 @@ public class MonopolyGame {
     }
 
     private void rankPlayers() {
-        int rank = 1;
-        rank = rankSurvivingPlayersByAssets(rank);
-        rankBankruptPlayersBySurvivalTime(rank);
+        List<Player> survivedPlayersRank = rankSurvivingPlayersByAssets();
+        List<Player> bankruptedPlayersRank = rankBankruptPlayersBySurvivalTime();
+
+        announceWinner(combinePlayerRank(survivedPlayersRank, bankruptedPlayersRank));
     }
 
-    private int rankSurvivingPlayersByAssets(int rank) {
+    private List<Player> rankSurvivingPlayersByAssets() {
+        List<Player> survivedPlayersRank = new ArrayList<>();
+        
         PriorityQueue<Player> rankedSurvivingPlayers = new PriorityQueue<>(
             (p1, p2) -> Integer.compare(p2.getCashManager().calculateTotalAssets(),
                                         p1.getCashManager().calculateTotalAssets()));
@@ -153,16 +162,33 @@ public class MonopolyGame {
         
         while (!rankedSurvivingPlayers.isEmpty()) {
             Player player = rankedSurvivingPlayers.poll();
-            System.out.println(rank++ + "등: 플레이어 " + player.getId() + " (총자산: " + player.getCashManager().getCash() + ")");
+            survivedPlayersRank.add(player);
         }
 
-        return rank;
+        return survivedPlayersRank;
     }
 
-    private void rankBankruptPlayersBySurvivalTime(int rank) {
+    private List<Player> rankBankruptPlayersBySurvivalTime() {
+        List<Player> bankruptPlayersRank = new ArrayList<>();
+
         while (!bankruptPlayers.isEmpty()) {
             Player bankruptPlayer = bankruptPlayers.remove();
-            System.out.println(rank++ + "등: 플레이어 " + bankruptPlayer.getId());
+            bankruptPlayersRank.add(bankruptPlayer);
         }
+
+        return bankruptPlayersRank;
+    }
+
+    private List<Player> combinePlayerRank(List<Player> survivedPlayersRank, List<Player> bankruptedPlayersRank) {
+    return Stream.of(survivedPlayersRank, bankruptedPlayersRank)
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
+    }
+
+    private void announceWinner(List<Player> rank) {
+    System.out.println("순위를 공개합니다");
+    List<String> finalRank = rank.stream().map(Player::getId).toList();
+    IntStream.range(0, finalRank.size())
+            .forEach(i -> System.out.println((i+1) + "등 : 플레이어 " + finalRank.get(i)));
     }
 }
