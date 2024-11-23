@@ -2,7 +2,12 @@ package domain;
 
 import domain.component.card.ChanceCardFactory;
 import domain.component.card.ChanceCardType;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Collections;
@@ -15,6 +20,9 @@ import domain.component.card.SocialFundCardFactory;
 import domain.component.card.SocialFundCardType;
 import domain.player.Player;
 import java.util.Iterator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class MonopolyGame {
 
@@ -58,6 +66,45 @@ public class MonopolyGame {
             printRoundNumber(i);
             playRound();
         }
+
+        finalizeGame();
+    }
+
+    private void finalizeGame() {
+        List<Player> survivedPlayersRank = determineSurvivedPlayersRank();
+        List<Player> bankruptedPlayersRank = determineBankruptedPlayersRank();
+        List<Player> combinedRank = combinePlayerRank(survivedPlayersRank, bankruptedPlayersRank);
+        announceWinner(combinedRank);
+    }
+
+    private List<Player> determineBankruptedPlayersRank() {
+        List<Player> bankruptRank = new ArrayList<>(
+                bankruptPlayers.values().stream().toList()
+        );
+        Collections.reverse(bankruptRank);
+
+        return bankruptRank;
+    }
+
+    private List<Player> determineSurvivedPlayersRank() {
+        return players.values()
+                .stream()
+                .peek(player -> player.getCashManager().reduceCash(Integer.MAX_VALUE))
+                .sorted(Comparator.comparingInt(p -> p.getCashManager().getCash()))
+                .toList();
+    }
+
+    private List<Player> combinePlayerRank(List<Player> survivedPlayersRank, List<Player> bankruptedPlayersRank) {
+        return Stream.of(survivedPlayersRank, bankruptedPlayersRank)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    private void announceWinner(List<Player> rank) {
+        System.out.println("순위를 공개합니다");
+        List<String> finalRank = rank.stream().map(Player::getId).toList();
+        IntStream.range(0, finalRank.size())
+                .forEach(i -> System.out.println((i+1) + "등 : 플레이어 " + finalRank.get(i)));
     }
 
     private void printRoundNumber(int number) {
@@ -73,6 +120,9 @@ public class MonopolyGame {
         while (iterator.hasNext()) {
             Player player = iterator.next();
             player.takeTurn();
+            if (players.size() == 1) {
+                break;
+            }
         }
     }
 
