@@ -1,7 +1,5 @@
 package domain;
 
-import domain.component.card.ChanceCardFactory;
-import domain.component.card.ChanceCardType;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -9,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -17,9 +14,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import domain.component.Board;
-import domain.component.card.Card;
-import domain.component.card.SocialFundCardFactory;
-import domain.component.card.SocialFundCardType;
 import domain.player.Player;
 
 public class MonopolyGame {
@@ -33,26 +27,18 @@ public class MonopolyGame {
     private Board board;
     private static Map<String, Player> players;
     private static Queue<Player> bankruptPlayers;
-    public static Queue<Card> chanceCardDeck;
-    public static Queue<Card> socialFundCardDeck;
 
     public MonopolyGame(Scanner scanner, String id) {
         this.scanner = scanner;
         this.id = id;
-        board = new Board();
+        this.board = new Board();
         players = new HashMap<String, Player>();
         bankruptPlayers = new LinkedList<Player>();
-        chanceCardDeck = new LinkedList<Card>();
-        socialFundCardDeck = new LinkedList<Card>();
     }
 
     public void initialize() {
         int numOfPlayer = enterNumOfPlayer();
         generatePlayer(numOfPlayer);
-        buildDeck(ChanceCardType.values());
-        buildDeck(SocialFundCardType.values());
-        shuffleDeck(chanceCardDeck);
-        shuffleDeck(socialFundCardDeck);
         playGame();
     }
 
@@ -105,22 +91,6 @@ public class MonopolyGame {
             String playerId = Integer.toString(i);
             players.put(playerId, new Player(playerId));
         }
-    }
-
-    private void buildDeck(ChanceCardType[] values) {
-        for (ChanceCardType type : values) {
-            chanceCardDeck.add(ChanceCardFactory.createChanceCards(type));
-        }
-    }
-
-    private void buildDeck(SocialFundCardType[] values) {
-        for (SocialFundCardType type : values) {
-            socialFundCardDeck.add(SocialFundCardFactory.createSocialFundCards(type));
-        }
-    }
-
-    private void shuffleDeck(Queue<Card> card) {
-        Collections.shuffle((LinkedList<Card>) card);
     }
 
     public static Map<String, Player> getPlayers() {
