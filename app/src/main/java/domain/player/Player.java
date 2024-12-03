@@ -34,12 +34,6 @@ public class Player {
         this.state = state;
     }
 
-    public void drawCard(Queue<Card> deck) {
-        Card card = deck.remove();
-        card.takeEffect(this);
-        deck.add(card);
-    }
-
     public boolean isNormalState() {
         return this.state instanceof NormalState;
     }
