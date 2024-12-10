@@ -29,12 +29,6 @@ public class Player {
         stateManager.getState().takeTurn();
     }
 
-    public void drawCard(Queue<Card> deck) {
-        Card card = deck.remove();
-        card.takeEffect(this);
-        deck.add(card);
-    }
-
     public String getId() {
         return id;
     }
