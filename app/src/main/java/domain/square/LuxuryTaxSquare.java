@@ -3,7 +3,7 @@ package domain.square;
 import domain.player.Player;
 
 public class LuxuryTaxSquare extends Square {
-    private final int TAX = 1000000000;
+    private final int TAX = 200;
 
     public LuxuryTaxSquare(int index, String name) {
         this.index = index;
