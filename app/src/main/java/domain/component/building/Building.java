@@ -27,10 +27,4 @@ public abstract class Building {
     public int getPrice() {
         return price;
     }
-
-    public int sold() {
-        int currentCount = count;
-        count = 0;
-        return currentCount * price;
-    }
 }

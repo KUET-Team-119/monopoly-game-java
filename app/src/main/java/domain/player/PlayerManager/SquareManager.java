@@ -1,13 +1,12 @@
 package domain.player.PlayerManager;
 
+import domain.square.LotSquare;
+import domain.square.PropertySquare;
+import domain.square.RailRoadSquare;
+import domain.square.UtilitySquare;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import domain.square.RailRoadSquare;
-import domain.square.UtilitySquare;
-import domain.square.LotSquare;
-import domain.square.PropertySquare;
 
 public class SquareManager {
     private Map<Integer, PropertySquare> propertySquares;
@@ -38,10 +37,6 @@ public class SquareManager {
             }
         }
         return count;
-    }
-
-    public Map<Integer, PropertySquare> getPropertySquares() {
-        return propertySquares;
     }
 
     // 특정 부지를 맵에서 제거

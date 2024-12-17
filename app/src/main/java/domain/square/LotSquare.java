@@ -54,8 +54,4 @@ public class LotSquare extends PropertySquare {
     public int getRent() {
         return price + house.getRent() + hotel.getRent();
     }
-
-    public int sellToBank() {
-        return house.sold() + hotel.sold();
-    }
 }

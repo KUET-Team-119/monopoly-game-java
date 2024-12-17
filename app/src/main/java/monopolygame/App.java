@@ -1,10 +1,9 @@
 package monopolygame;
 
+import domain.MonopolyGame;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import domain.MonopolyGame;
 
 public class App {
     private Scanner scanner;

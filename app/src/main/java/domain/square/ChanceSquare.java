@@ -1,10 +1,9 @@
 package domain.square;
 
-import java.util.Queue;
-
 import domain.MonopolyGame;
 import domain.component.card.Card;
 import domain.player.Player;
+import java.util.Queue;
 
 public class ChanceSquare extends Square {
 

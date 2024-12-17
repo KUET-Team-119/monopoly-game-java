@@ -1,10 +1,9 @@
 package domain.player.PlayerManager;
 
-import java.util.List;
-
 import domain.player.Player;
 import domain.square.LotSquare;
 import domain.square.PropertySquare;
+import java.util.List;
 
 public class CashManager {
 

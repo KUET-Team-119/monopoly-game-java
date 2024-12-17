@@ -1,26 +1,25 @@
 package domain;
 
+import domain.component.Board;
+import domain.component.card.Card;
 import domain.component.card.ChanceCardFactory;
 import domain.component.card.ChanceCardType;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.LinkedList;
-import java.util.List;
+import domain.component.card.SocialFundCardFactory;
+import domain.component.card.SocialFundCardType;
+import domain.player.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import domain.component.Board;
-import domain.component.card.Card;
-import domain.component.card.SocialFundCardFactory;
-import domain.component.card.SocialFundCardType;
-import domain.player.Player;
 
 public class MonopolyGame {
 
